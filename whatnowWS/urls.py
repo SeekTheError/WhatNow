@@ -5,8 +5,9 @@ from django.conf.urls.defaults import *
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+
     # Example:
-    # (r'^whatnowWS/', include('whatnowWS.foo.urls')),
+    (r'^$', controller.index.view),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

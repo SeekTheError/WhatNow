@@ -7,6 +7,8 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
+import os
+
 DJANGO_ROOT = os.path.dirname(os.path.realpath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(DJANGO_ROOT, '..'))
 STATIC_MEDIA_ROOT = PROJECT_ROOT + '/static'
