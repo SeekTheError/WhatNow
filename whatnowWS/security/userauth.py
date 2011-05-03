@@ -5,10 +5,11 @@ COOKIE_KEY='kuestions_user'
 
 def checkSession (request,context={}) :
   '''
-  add some information to the context for the main page, like user info, current question, etc
-  Only if the user is correctly logged in, otherwise , some basic info will be add
+  add some information to the context for the main page, like user infor, current question, etc
+  Only if the user is correctly logged in, otherwise , somme basic info will be add
   like top questions, etc
   '''
+  
   cookieValue=None
   if request.COOKIES.__contains__(COOKIE_KEY) : 
     cookieValue= request.COOKIES[COOKIE_KEY]
