@@ -14,16 +14,10 @@ class User(Document) :
   sessionId=TextField()
   sessionExpire=DateTimeField()
   topics=ListField(TextField)
-  followedQuestions=ListField(TextField)
   isActivated=BooleanField()
   
   type=TextField()
   TYPE='user'
-  
-  #Those strings are javascript function, their usage are deprecated
-  FIND_BY_LOGIN='function(u) { if(u.type == \'user\') {if( u.login == \'$login\') {emit (u.id,u);}}}'
-  FIND_BY_SESSION_ID='function(u) { if(u.type == \'user\') {if( u.sessionId == \'$sessionId\') {emit (u.id,u);}}}'
-  FIND_BY_ACTIVATION_CODE='function(u) { if(u.type == \'user\') {if( u.activationCode == \'$activationCode\') {emit (u.id,u);}}}'
  
     
   
@@ -88,6 +82,40 @@ class User(Document) :
       raise IntegrityConstraintException
 
 
+
+class Article(Document) :
+  _id = TextField()
+  link=TextField()
+  title=TextField()
+  date=DateTimeField()
+  extract=TextField()
+  content=TextField()
+  sessionExpire=DateTimeField()
+  tags=ListField(TextField)
+  isAnalyzed=BooleanField()
+  source=TextField()
+  
+  def __init__(self,id,link,title,date,extract,isAnalyzed=False,content=None)
+    self._id=id
+    self.link=link
+    self.title=title
+    self.date=date
+    self.extract=extract
+    self.isAnalyzed=isAnalyzed
+    self.content=content
+  
+  def create(self):
+    if self.findByName() == None:
+      self.store(getDb())
+  def update(self):
+    '''
+    update the user, only if he already exist
+    '''  
+    if self.id:
+      self.store(getDb())*
+      
+  def findByLink(self)
+    return Article.load(dblayer.db,self.name)
 
 class IllegalAttempt(Exception) :
   pass
