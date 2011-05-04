@@ -42,6 +42,7 @@ def perform(articleUrl) :
     a.tags.append(words[i].decode('utf8'))
     i+=1
   print a.tags
+  a.isAnalyzed=True
   a.update()
   print a
     

@@ -26,3 +26,13 @@ def createTestArticle() :
 if __name__ == '__main__':
   createTestArticle()
   analyzeArticle.perform('http://www.koreaherald.com/lifestyle/Detail.jsp?newsMLId=20110503000756')
+  
+  
+def analyzeAll():
+  pass
+  '''
+  create a view to find article that are not analyzed
+  
+  itterate over those, single threaded
+  '''  
+  
