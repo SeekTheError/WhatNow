@@ -13,7 +13,7 @@ class User(Document) :
   activationCode=TextField()
   sessionId=TextField()
   sessionExpire=DateTimeField()
-  topics=ListField(TextField)
+  topics=ListField(TextField())
   isActivated=BooleanField()
   
   type=TextField()
@@ -84,38 +84,37 @@ class User(Document) :
 
 
 class Article(Document) :
-  _id = TextField()
+  '''
+  the link is the id of the article
+  '''
+  _id=TextField()
   link=TextField()
   title=TextField()
   date=DateTimeField()
   extract=TextField()
   content=TextField()
-  sessionExpire=DateTimeField()
-  tags=ListField(TextField)
+  tags=ListField(TextField())
   isAnalyzed=BooleanField()
   source=TextField()
-  
-  def __init__(self,id,link,title,date,extract,isAnalyzed=False,content=None)
-    self._id=id
-    self.link=link
-    self.title=title
-    self.date=date
-    self.extract=extract
-    self.isAnalyzed=isAnalyzed
-    self.content=content
+  type = TextField()
+  TYPE = 'article'
+
   
   def create(self):
-    if self.findByName() == None:
+    if self.findById() == None:
+      self.type=self.TYPE
+      self.isAnalyzed=False
       self.store(getDb())
-  def update(self):
-    '''
-    update the user, only if he already exist
-    '''  
-    if self.id:
-      self.store(getDb())*
       
-  def findByLink(self)
-    return Article.load(dblayer.db,self.name)
+  def update(self):
+      self.store(getDb())
+      
+  def findById(self) :
+    view=dblayer.view("article/id",self._id)
+    if len(view) == 0 :
+      return None
+    elif len(view) == 1:
+      for u in view : return Article.load(getDb(),u.id)
 
 class IllegalAttempt(Exception) :
   pass
