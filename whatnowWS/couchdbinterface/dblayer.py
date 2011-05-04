@@ -16,10 +16,9 @@ NOTE: it may not work on windows, because of the different convention for the ne
 
 print 'loading couchdb layer'
 from couchdb import *
-import inject
 
 
-DB_NAME='kuestionsdb'
+DB_NAME='whatnowdb'
 
 
 #SERVER_URL='http://rem:azertyuiop@localhost:5984/'
