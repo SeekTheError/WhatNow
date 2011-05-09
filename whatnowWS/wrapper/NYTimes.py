@@ -1,7 +1,9 @@
+import sys
+sys.path.insert(0, '..')
 from urllib import urlopen
 from couchdb import Server
 from couchdb.mapping import Document, TextField, IntegerField, DateField, date
-import entities
+from couchdbinterface import entities
 
 #search 'keyword' during 'pastDay' for 'maxPage' which have 'numOfArt' article in 1 page
 def wrapNYTimes(keyword, pastDay = 30, maxPage = 10):

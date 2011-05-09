@@ -1,8 +1,10 @@
+import sys
+sys.path.insert(0, '..')
 from HTMLParser import HTMLParser
 from urllib import urlopen
 from couchdb import Server
 from couchdb.mapping import Document, TextField, IntegerField, DateField
-import entities
+from couchdbinterface import entities
 
 class WPostParser(HTMLParser):
     def __init__(self):
