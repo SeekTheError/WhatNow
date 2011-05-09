@@ -1,6 +1,6 @@
 from couchdbinterface.entities import User
 
-COOKIE_KEY='kuestions_user'
+COOKIE_KEY='whatnow_user'
 
 
 def checkSession (request,context={}) :

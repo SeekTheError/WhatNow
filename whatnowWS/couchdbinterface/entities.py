@@ -13,17 +13,11 @@ class User(Document) :
   activationCode=TextField()
   sessionId=TextField()
   sessionExpire=DateTimeField()
-  topics=ListField(TextField)
-  followedQuestions=ListField(TextField)
+  topics=ListField(TextField())
   isActivated=BooleanField()
   
   type=TextField()
   TYPE='user'
-  
-  #Those strings are javascript function, their usage are deprecated
-  FIND_BY_LOGIN='function(u) { if(u.type == \'user\') {if( u.login == \'$login\') {emit (u.id,u);}}}'
-  FIND_BY_SESSION_ID='function(u) { if(u.type == \'user\') {if( u.sessionId == \'$sessionId\') {emit (u.id,u);}}}'
-  FIND_BY_ACTIVATION_CODE='function(u) { if(u.type == \'user\') {if( u.activationCode == \'$activationCode\') {emit (u.id,u);}}}'
  
     
   
@@ -88,6 +82,42 @@ class User(Document) :
       raise IntegrityConstraintException
 
 
+
+class Article(Document) :
+  '''
+  the link is the id of the article
+  '''
+  _id=TextField()
+  link=TextField()
+  title=TextField()
+  date=DateTimeField()
+  extract=TextField()
+  content=TextField()
+  tags=ListField(TextField())
+  isAnalyzed=BooleanField()
+  '''
+  either kh, nyt, 
+  '''
+  source=TextField()
+  type = TextField()
+  TYPE = 'article'
+
+  
+  def create(self):
+    if self.findById() == None:
+      self.type=self.TYPE
+      self.isAnalyzed=False
+      self.store(getDb())
+      
+  def update(self):
+      self.store(getDb())
+      
+  def findById(self) :
+    view=dblayer.view("article/id",self._id)
+    if len(view) == 0 :
+      return None
+    elif len(view) == 1:
+      for u in view : return Article.load(getDb(),u.id)
 
 class IllegalAttempt(Exception) :
   pass

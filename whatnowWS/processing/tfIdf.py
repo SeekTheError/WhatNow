@@ -26,16 +26,26 @@ def tfidf(word, document, documentList):
   return (tf(word,document) * idf(word,documentList))
 
 if __name__ == '__main__':
-  documentList = []
   
+  documentList = [] 
   doc=open('sample.txt','r')
   for line in doc.readlines() :
     documentList.append(line.replace('"','').replace('.','').replace(',','').lower())
+  perform(documentList)
+  
+def perform(text) : 
+  text=text.encode('utf8')
+  documentList = []
+  for line in text.split(','):
+  
+    documentList.append(line.lower().replace('\'',' ').replace('(',' ').replace(')',' '))
   
   words = {}
   documentNumber = 0
   for word in documentList[documentNumber].split(None):
     words[word] = tfidf(word,documentList[documentNumber],documentList)
+  
+  results=[]
   for item in sorted(words.items(), key=itemgetter(1), reverse=True):
-    print "%f <= %s" % (item[1], item[0])
-
+    results.append(item[0])
+  return results
