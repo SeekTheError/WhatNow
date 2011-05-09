@@ -1,0 +1,75 @@
+a {color:#333; text-decoration:none}
+a:hover {color:#ccc; text-decoration:none}
+
+.label { float:left; width:120px; }
+.error { color:red; padding-left:10px; }
+.submit { margin-left:125px; margin-top:10px; }
+
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+
+#boxes {
+	font-family:verdana;
+	font-size:15px;
+}
+  
+#boxes .window {
+  position:absolute;
+  left:0;
+  top:0;
+  width:600px;
+  height:400px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes #d_register {
+  width:600px; 
+  height:500px;
+  padding:10px;
+  background-color:#ffffff;
+  font-size: 13px;
+}
+
+#boxes #d_login {
+  width:600px; 
+  height:400px;
+}
+
+#d_login .d-header {
+  background:url(../user/login-header.png) no-repeat 0 0 transparent; 
+  width:375px; 
+  height:150px;
+}
+
+#d_login .d-header input {
+  position:relative;
+  top:60px;
+  left:100px;
+  border:3px solid #cccccc;
+  height:22px;
+  width:200px;
+  font-size:15px;
+  padding:5px;
+  margin-top:4px;
+}
+
+#d_login .d-blank {
+  float:left;
+  background:url(../user/login-blank.png) no-repeat 0 0 transparent; 
+  width:267px; 
+  height:53px;
+}
+
+#d_login .d-login {
+  float:left;
+  width:108px; 
+  height:53px;
+}

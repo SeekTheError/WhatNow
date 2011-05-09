@@ -1,18 +1,70 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="imagetoolbar" content="no" />
+
+	<link rel="stylesheet" href="css/main.css" type="text/css" />
 	
-	<meta http-equiv="imagetoolbar" content="no">
-	<link href="{{ MEDIA_URL }}css/main.css" rel="stylesheet" type="text/css" />
-	<title>WhatNOW</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+	<script type="text/javascript" src="js/account.js"></script>
+
+	<title>[CS457] Web-base Software Development - WhatNOW</title>
+
 </head>
 <body>
 	<div class="bg">
 		<div class="header">
 			<div class="logo" align="left">
-				logo
+				WhatNOW?!
 			</div>
 			<div class="account" align="left">
-				user
+				<a href="#d_login" name="modal"><input type='button' name='Login' value='Login'/></a><br>
+				<a href="#d_register" name="modal"><input type='button' name='Register' value='Register'/></a>
+
+				<div id="boxes">
+					<!-- Start of Login Dialog -->  
+					<div id="d_login" class="window">
+						<div class="d-header">
+							<input type="text" value="username" onclick="this.value=''"/><br/>
+							<input type="password" value="Password" onclick="this.value=''"/>    
+						</div>
+						<div class="d-blank"></div>
+						<div class="d-login"><input type="image" alt="Login" title="Login" src="user/login-button.png"/></div>
+					</div>
+					<!-- End of Login Dialog -->  
+
+					<!-- Start of Register Dialog -->
+					<div id="d_register" class="window">
+						<form>
+							<div>
+								<span class="label">User ID</span>
+								<input type="text" class="userid" name="userid" />
+								<span class="error">Only numeral, character or _(underscore)</span>
+							</div>
+							<div>
+								<span class="label">Password</span>
+								<input type="password" class="password" name="password" />
+								<span class="error">Cannot be blank</span>
+							</div>
+							<div>
+								<span class="label">Confirm Password</span>
+								<input type="password" class="confpass" name="confpass" />
+								<span class="error">It doesn't match</span>
+							</div>
+							<div>
+								<span class="label">E-mail</span>
+								<input type="text" class="email" name="email" />
+								<span class="error">Invaild E-mail Address</span>
+							</div>
+							<input class="submit" type="submit" value="Register" />
+							<a href="#"class="close"/><input type="button" name="Close" value="Close" /></a>
+						</form>
+					</div>
+					<!-- End of Register Dialog -->
+				</div>
+
 			</div>
 		</div>
 		<div class="sub_body">
@@ -24,7 +76,7 @@
 					search
 				</div>
 				<div class="content">
-					contents: cloud &amp; time-line results
+					contents: cloud & time-line results
 				</div>
 			</div>
 			<div class="category">
@@ -46,4 +98,7 @@
 		</div>
 	</div>
 
-</body></html>
+	<!-- Mask to cover the whole screen -->
+	<div id="mask"></div>
+</body>
+</html>
