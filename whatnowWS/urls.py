@@ -9,12 +9,12 @@ urlpatterns = patterns('',
 
     # Example:
     (r'^$', 'controller.indexcontroller.view'),
+    
+    (r'^register/$', 'security.registercontroller.register'),
+    (r'^register/(?P<code>\w+)$', 'security.registercontroller.activate'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+  
+     
     
     #For static media files
     (r'^whatnow/media/(?P<path>.*)$', 'django.views.static.serve',

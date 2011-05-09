@@ -8,6 +8,9 @@ Algorithm
 5 calcul article popularity score on google
 
 """
+"""
+use this to add all the module from whatnow to the python path
+"""
 import sys
 sys.path.insert(0, '..')
 

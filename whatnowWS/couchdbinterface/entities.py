@@ -95,6 +95,9 @@ class Article(Document) :
   content=TextField()
   tags=ListField(TextField())
   isAnalyzed=BooleanField()
+  '''
+  either kh, nyt, 
+  '''
   source=TextField()
   type = TextField()
   TYPE = 'article'
