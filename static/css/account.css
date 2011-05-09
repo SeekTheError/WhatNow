@@ -44,7 +44,7 @@ a:hover {color:#ccc; text-decoration:none}
 }
 
 #d_login .d-header {
-  background:url(../user/login-header.png) no-repeat 0 0 transparent; 
+  background:url(../img/login-header.png) no-repeat 0 0 transparent; 
   width:375px; 
   height:150px;
 }
@@ -63,7 +63,7 @@ a:hover {color:#ccc; text-decoration:none}
 
 #d_login .d-blank {
   float:left;
-  background:url(../user/login-blank.png) no-repeat 0 0 transparent; 
+  background:url(../img/login-blank.png) no-repeat 0 0 transparent; 
   width:267px; 
   height:53px;
 }

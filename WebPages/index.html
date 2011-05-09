@@ -5,10 +5,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="imagetoolbar" content="no" />
 
-	<link rel="stylesheet" href="css/main.css" type="text/css" />
+	<link rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" type="text/css" />
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
-	<script type="text/javascript" src="js/account.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/account.js"></script>
 
 	<title>[CS457] Web-base Software Development - WhatNOW</title>
 
@@ -31,7 +31,7 @@
 							<input type="password" value="Password" onclick="this.value=''"/>    
 						</div>
 						<div class="d-blank"></div>
-						<div class="d-login"><input type="image" alt="Login" title="Login" src="user/login-button.png"/></div>
+						<div class="d-login"><input type="image" alt="Login" title="Login" src="{{ MEDIA_URL }}img/login-button.png"/></div>
 					</div>
 					<!-- End of Login Dialog -->  
 
