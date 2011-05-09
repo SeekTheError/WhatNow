@@ -15,6 +15,7 @@ body {
 	left:			50%;
 	margin:			0 0 0 -500;
 	padding:		0 0 0 0;
+	background:		gray;
 }
 
 .header {
@@ -26,6 +27,7 @@ body {
 	height:			70px;
 	margin:			5 5 5 5;
 	padding:		0 0 0 0;
+	background:		white;
 }
 
 .sub_body {
@@ -37,6 +39,7 @@ body {
 	height:			678px;
 	margin:			0 5 5 5;
 	padding:		0 0 0 0;
+	background:		white;
 }
 
 .footer {
@@ -45,17 +48,18 @@ body {
 	border-width:	1px;
 	position:		relative;
 	width:			96.8%;
-	height:			30px;
+	height:			26px;
 	margin:			0 5 0 5;
-	padding:		2 10 0 10;
+	padding:		6 10 0 10;
+	background:		white;
 }
 
 .logo {
 	position:		relative;
 	width:			680px;
-	height:			60px;
+	height:			54px;
 	margin:			5 5 0 10;
-	padding:		0 0 0 0;
+	padding:		10 0 0 10;
 	float:			left;
 }
 
@@ -64,7 +68,7 @@ body {
 	width:			270px;
 	height:			60px;
 	margin:			5 10 0 5;
-	padding:		0 0 0 0;
+	padding:		5 0 0 0;
 	float:			right;
 }
 
@@ -84,10 +88,10 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			78%;
-	height:			6%;
+	width:			65%;
+	height:			30px;
 	margin:			0 0 0 0;
-	padding:		5 5 5 5;
+	padding:		15 5 5 13;
 	float:			left;
 }
 
@@ -96,10 +100,10 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			18%;
-	height:			6%;
+	width:			30%;
+	height:			30px;
 	margin:			0 0 0 0;
-	padding:		5 5 5 5;
+	padding:		15 5 5 6;
 	float:			right;
 }
 
