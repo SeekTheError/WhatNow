@@ -45,17 +45,13 @@ from util.encode import encode
 
 
 def openSession(request,user) :
-  print 'trying to open session for ',user.login
   t = loader.get_template('index.html')
-  sessionExpire = getTomorowDatetime()
-  #print sessionExpire
-  field=DateTimeField()
-  #field._to_
-  #user.sessionExpire=sessionExpire
-  user.sessionId= encode(user.login+user.email+str(sessionExpire)+str(uuid.uuid1()))
-  user.update()
-
-  #Todo add an expiration date!
+  if user.sessionId.startswith('XXX'):
+    print 'trying to open session for ',user.login
+    user.sessionId= encode(user.login+user.email+str(sessionExpire)+str(uuid.uuid1()))
+    user.update()
+  else :
+    print 'returning the existing opened session'
   response= HttpResponseRedirect("/");
   response.set_cookie(userauth.COOKIE_KEY, user.sessionId)
   return response
