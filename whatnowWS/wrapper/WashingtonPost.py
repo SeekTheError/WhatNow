@@ -168,7 +168,7 @@ class WPostParser(HTMLParser):
                 break
         return string
 
-def wrapWPost(keyword, pastDay = 60, maxPage = 10):
+def wrapWPost(keyword, maxPage = 10, pastDay = 60):
     for i in range(maxPage):
         print 'wrapping WPost : page '+str(i+1)
         wp = WPostParser()
@@ -176,8 +176,9 @@ def wrapWPost(keyword, pastDay = 60, maxPage = 10):
         wp.feed(urlopen(url).read())
         wp.storeArticle(keyword)
         wp.close()
+    print 'done'
 
 #################TEST####################
-
-keyword = 'bin laden'
-wrapWPost (keyword)
+if __name__ == '__main__':
+    keyword = 'bin laden'
+    wrapWPost (keyword)

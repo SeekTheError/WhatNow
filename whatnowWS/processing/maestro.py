@@ -12,7 +12,9 @@ import sys
 sys.path.insert(0, '..')
 
 from couchdbinterface.entities import Article
+from couchdbinterface import dblayer
 import analyzeArticle
+
 
 def createTestArticle() :
   a=Article()
@@ -29,10 +31,13 @@ if __name__ == '__main__':
   
   
 def analyzeAll():
-  pass
   '''
   create a view to find article that are not analyzed
   
   itterate over those, single threaded
-  '''  
+  '''
+  view=dblayer.view("article/notAnalized")
+  for u in view :
+    analyzeArticle.perform(u.id)
+  
   

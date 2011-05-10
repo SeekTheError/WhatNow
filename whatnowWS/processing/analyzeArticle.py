@@ -31,7 +31,11 @@ def perform(articleUrl) :
   
   print a.source
   #download of the article
-  rawContent = urllib2.urlopen(articleUrl).read()  
+  #sometimes it can't connect to url, so surround with try statement 
+  try:
+    rawContent = urllib2.urlopen(articleUrl).read()
+  except (URLError):
+    return
   content=extractContent(rawContent,a.source)
   a.content=content
   a.update()
@@ -41,7 +45,7 @@ def perform(articleUrl) :
   i=0
   a.tags=[]
   #keep only the 10 first tags
-  while i < 9 :
+  while (i < 10 and i < len(words)) :
     a.tags.append(words[i].decode('utf8'))
     i+=1
   print a.tags
@@ -57,14 +61,41 @@ def extractContent(rawHtml,source):
   soup = BeautifulSoup(rawHtml.decode('utf8'))
   if source == 'kh':
     return extractContentKoreanHerald(soup)
-  
+  if source == 'nyt':
+    return extractContentNewYorkTimes(soup)
+  if source == 'wp':
+    return extractContentWashingtonPost(soup)
+
   
 def extractContentKoreanHerald(soup):
   print 'extracting content: Korea Herald'
   article = soup('div', {'id': '_article'})
   articletext = article[0].text
+  print articletext
   cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
   return cleanarticle
    
+   
+def extractContentNewYorkTimes(soup):
+  print 'extracting content: New York Times'
+  article = soup('div', {'class': 'articleBody'})
+  articletext = ''
+  for i in range(len(article)-1):
+    articletext += article[i].text + ' '
+  #sometimes it makes UnicodeEncodeError, it cannot encode character "&mdash;" 
+  #cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
+  #return cleanarticle
+  return articletext
+
+
+def extractContentWashingtonPost(soup):
+  print 'extracting content: Washington Post'
+  article = soup('div', {'class': 'article_body'})
+  articletext = ''
+  for i in range(len(article)-1):
+    articletext += article[i].text + ' '
+  #cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
+  #return cleanarticle
+  return articletext
 
 

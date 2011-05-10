@@ -6,9 +6,9 @@ from couchdb.mapping import Document, TextField, IntegerField, DateField, date
 from couchdbinterface import entities
 
 #search 'keyword' during 'pastDay' for 'maxPage' which have 'numOfArt' article in 1 page
-def wrapNYTimes(keyword, pastDay = 30, maxPage = 10):
+def wrapNYTimes(keyword, maxPage = 10, pastDay = 30):
     for i in range(maxPage):
-        print 'wrapping NYTimes : page '+str(i+1)
+        print 'wrapping NYTimes : page '+str(i+1) 
         url = 'http://query.nytimes.com/search/sitesearch?query=%s&less=multimedia&more=past_%d&page=%d' % (keyword, pastDay, i+1)
         #print 'pageURL: '+url
         req = urlopen(url)
@@ -17,6 +17,7 @@ def wrapNYTimes(keyword, pastDay = 30, maxPage = 10):
         lineList = page.splitlines()
         lineList.pop(0)
         parseResult(lineList, keyword)
+    print 'done'
 
 #parse results from 1 page and store to 'Article' db
 def parseResult(LineList, keyword):
@@ -123,5 +124,5 @@ def parseUrl(content):
     return url
 
 #################TEST####################
-
-wrapNYTimes('japan')
+if __name__ == '__main__':
+    wrapNYTimes('japan')
