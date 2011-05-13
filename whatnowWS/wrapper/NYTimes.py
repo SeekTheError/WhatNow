@@ -125,4 +125,4 @@ def parseUrl(content):
 
 #################TEST####################
 if __name__ == '__main__':
-    wrapNYTimes('japan')
+    wrapNYTimes('japan', 1)

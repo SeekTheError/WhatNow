@@ -22,7 +22,6 @@ import urllib2
 import tfIdf
 
 
-
 def perform(articleUrl) :
   #retrieve the article
   print articleUrl
@@ -34,7 +33,7 @@ def perform(articleUrl) :
   #sometimes it can't connect to url, so surround with try statement 
   try:
     rawContent = urllib2.urlopen(articleUrl).read()
-  except (URLError):
+  except (urllib2.URLError):
     return
   content=extractContent(rawContent,a.source)
   a.content=content
@@ -71,31 +70,38 @@ def extractContentKoreanHerald(soup):
   print 'extracting content: Korea Herald'
   article = soup('div', {'id': '_article'})
   articletext = article[0].text
-  print articletext
   cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
   return cleanarticle
-   
-   
+      
+      
 def extractContentNewYorkTimes(soup):
   print 'extracting content: New York Times'
   article = soup('div', {'class': 'articleBody'})
   articletext = ''
-  for i in range(len(article)-1):
-    articletext += article[i].text + ' '
-  #sometimes it makes UnicodeEncodeError, it cannot encode character "&mdash;" 
-  #cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
-  #return cleanarticle
-  return articletext
-
+  if (len(article) > 0):
+      for elem in article:
+        articletext += elem.text + ' '
+  else:
+      article = soup('div', {'class': 'entry-content'})
+      for elem in article:
+        articletext += elem.text + ' '
+  cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
+  cleanarticle = cleanarticle.encode('cp949', errors='replace')
+  return cleanarticle
+  
 
 def extractContentWashingtonPost(soup):
   print 'extracting content: Washington Post'
   article = soup('div', {'class': 'article_body'})
   articletext = ''
-  for i in range(len(article)-1):
-    articletext += article[i].text + ' '
-  #cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
-  #return cleanarticle
-  return articletext
-
-
+  if (len(article) > 0):
+      for elem in article:
+        articletext += elem.text + ' '
+  else:
+      article = soup('div', {'id': 'entrytext'})
+      for elem in article:
+        articletext += elem.text + ' '
+  cleanarticle = BeautifulStoneSoup(articletext, convertEntities = BeautifulStoneSoup.ALL_ENTITIES).text
+  cleanarticle = cleanarticle.encode('cp949', errors='replace')
+  return cleanarticle
+  

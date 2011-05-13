@@ -180,5 +180,5 @@ def wrapWPost(keyword, maxPage = 10, pastDay = 60):
 
 #################TEST####################
 if __name__ == '__main__':
-    keyword = 'bin laden'
-    wrapWPost (keyword)
+    keyword = 'japan'
+    wrapWPost (keyword, 1)
