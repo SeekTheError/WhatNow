@@ -47,10 +47,11 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			96.8%;
+/*	width:			96.8%;*/
+	width:			970px;
 	height:			26px;
 	margin:			0 5 0 5;
-	padding:		6 10 0 10;
+	padding:		7 10 0 10;
 	background:		white;
 }
 
@@ -88,10 +89,11 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			65%;
-	height:			30px;
+	width:			482px;
+	height:			50px;
 	margin:			0 0 0 0;
-	padding:		15 5 5 13;
+/*	padding:		15 5 5 13;*/
+	padding:		0 0 0 10;
 	float:			left;
 }
 
@@ -100,11 +102,12 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			30%;
-	height:			30px;
-	margin:			0 0 0 0;
-	padding:		15 5 5 6;
-	float:			right;
+	width:			230px;
+	height:			50px;
+	margin:			0 0 0 4;
+	padding:		0 0 0 0;
+	float:			left;
+	text-align:		center;
 }
 
 .content {
@@ -112,12 +115,13 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			98.4%;
-	height:			90.6%;
+	width:			698px;
+	height:			585px;
 	margin:			3 0 0 0;
-	padding:		5 5 5 5;
+	padding:		15;
 	clear:			both;
 	float:			left;
+	z-index:		100;
 }
 
 .category {
