@@ -21,12 +21,12 @@ $(document).ready(function() {
 		$('#mask').fadeTo("slow",0.8);	
 	
 		//Get the window height and width
-		var winH = $(window).height();
-		var winW = $(window).width();
-              
+//		var winH = $(window).height();
+//		var winW = $(window).width();
+
 		//Set the popup window to center
-		$(id).css('top',  winH/2-$(id).height()/2);
-		$(id).css('left', -(winW/2-$(id).width()/4));
+//		$(id).css('top',  winH/2-$(id).height()/2);
+//		$(id).css('left', -(winW/2-$(id).width()/4));
 //		$(id).css('top',  winH/2-$(id).height()/2);
 //		$(id).css('left', winW/2-$(id).width()/2);
 	
