@@ -156,6 +156,8 @@ class WPostParser(HTMLParser):
         while (index != -1):
             string = string[:index] + string[index+1:]
             index = string.find('\t')
+        if (len(string)<=0):
+            return string
         while (True):
             if (string[0] == ' '):
                 string = string[1:]
@@ -173,7 +175,16 @@ def wrapWPost(keyword, maxPage = 10, pastDay = 60):
         print 'wrapping WPost : page '+str(i+1)
         wp = WPostParser()
         url = 'http://www.washingtonpost.com/newssearch/search.html?st=%s&cp=%d&scoa=Past+%d+days' % (keyword, i+1, pastDay)
-        wp.feed(urlopen(url).read())
+        try:
+            text = urlopen(url).read()
+        except:
+            print 'error occur during connect to url %s' % url
+            continue
+        try:
+            wp.feed(text.decode('cp949', errors='replace'))
+        except:
+            print 'error occur during parsing %s' % url
+            continue
         wp.storeArticle(keyword)
         wp.close()
     print 'done'

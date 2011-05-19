@@ -1,10 +1,16 @@
 from urllib import urlopen
 from xml.dom.minidom import *
 
+keywordList = []
+
 def NYTMostSearched():
-    keywordList = []
+    global keywordList
     url = 'http://www.nytimes.com/gst/mostpopular.html'
-    text = urlopen(url).read()
+    try:
+        text = urlopen(url).read()
+    except:
+        print 'error occur during connect to url %s' % url
+        return
     index = text.find('<p class="summary">Keywords most frequently searched by NYTimes.com readers.</p>')
     text = text[index:text.find('</ol>',index)]
     while 1:
@@ -14,15 +20,21 @@ def NYTMostSearched():
         text = text[i:]
         start = text.find('>')+1
         end = text.find('<')
-        keywordList.append(text[start:end])
+        keyword = text[start:end].strip()
+        if (not checkDuplication(keyword)):
+            keywordList.append([keyword, 0])
+            print keyword
         text = text[end:]
-    return keywordList
 
 
 def NYTMostPopular():
-    keywordList = []
+    global keywordList
     url = 'http://topics.nytimes.com/topics/reference/timestopics/index.html'
-    text = urlopen(url).read()
+    try:
+        text = urlopen(url).read()
+    except:
+        print 'error occur during connect to url %s' % url
+        return
     index = text.find('<h3>Most Popular Topics</h3>')
     text = text[index:text.find('</ol>',index)]
     while 1:
@@ -32,15 +44,21 @@ def NYTMostPopular():
         text = text[i:]
         start = text.find('>')+1
         end = text.find('<')
-        keywordList.append(text[start:end])
+        keyword = text[start:end].strip()
+        if (not checkDuplication(keyword)):
+            keywordList.append([keyword, 0])
+            print keyword
         text = text[end:]
-    return keywordList
     
 
 def WPTopics():
-    keywordList = []
+    global keywordList
     url = 'http://www.washingtonpost.com/'
-    text = urlopen(url).read()
+    try:
+        text = urlopen(url).read()
+    except:
+        print 'error occur during connect to url %s' % url
+        return
     index = text.find('<span class="label">In the News</span>')
     text = text[index:text.find('</ul>',index)]
     while 1:
@@ -50,38 +68,76 @@ def WPTopics():
         text = text[i:]
         start = text.find('>')+1
         end = text.find('<')
-        keywordList.append(text[start:end])
+        keyword = text[start:end].strip()
+        if (not checkDuplication(keyword)):
+            keywordList.append([keyword, 0])
+            print keyword
         text = text[end:]
-    return keywordList
 
 
-def toXML(keywordList):
+def checkDuplication(keyword):
+    global keywordList
+    for i in keywordList:
+        if keyword.upper()==i[0].upper():
+            return True
+    return False
+
+
+def measurePop():
+    global keywordList
+    for keyword in keywordList:
+        try:
+            url = 'http://www.washingtonpost.com/newssearch/search.html?st=%s' % (keyword[0])
+            text = urlopen(url).read()
+        except:
+            print 'error occur during connect to url %s' % url
+            continue
+        index = text.find('<b id="resultsCount">')+1
+        text = text[text.find('>',index)+1:text.find('</b>',index)]
+        pop = int(text)
+        keyword[1]=pop
+        print keyword[0], pop
+
+
+def toXML():
+    global keywordList
     impl = getDOMImplementation()
     doc = impl.createDocument(None, 'tags', None)
     root = doc.documentElement
-    for i in keywordList:
+    keywordList.sort(cmp)
+    for keyword in keywordList[:15]:
         node = doc.createElement('a')
         node.setAttributeNS(None, 'href', '#')
         node.setAttributeNS(None, 'style', 'font-size: 20pt;')
         node.setAttributeNS(None, 'color', '0xccff00')
         node.setAttributeNS(None, 'hicolor', '0x123456')
-        keyword = doc.createTextNode(i)
+        keyword = doc.createTextNode(keyword[0])
         node.appendChild(keyword)
         root.appendChild(node)
     print doc.toprettyxml()
     doc.writexml(file('cloud_data.xml', 'w'))
 
 
+def cmp(e1, e2):
+    if (e1[1]>e2[1]):
+        return -1
+    elif (e1[1]==e2[1]):
+        return 0
+    else:
+        return 1
+
+
 def wrapKeyword():
-    keywordList = []
-    keywordList.extend(NYTMostPopular())
-    keywordList.extend(NYTMostSearched())
-    keywordList.extend(WPTopics())
+    global keywordList
+    NYTMostPopular()
+    NYTMostSearched()
+    WPTopics()
+    measurePop()
+    toXML()
     print keywordList
-    toXML(keywordList)
+    return keywordList
+
 
 #################TEST####################
 if __name__ == '__main__':
     wrapKeyword()
-
-

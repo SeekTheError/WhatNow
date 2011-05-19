@@ -11,8 +11,12 @@ def wrapNYTimes(keyword, maxPage = 10, pastDay = 30):
         print 'wrapping NYTimes : page '+str(i+1) 
         url = 'http://query.nytimes.com/search/sitesearch?query=%s&less=multimedia&more=past_%d&page=%d' % (keyword, pastDay, i+1)
         #print 'pageURL: '+url
-        req = urlopen(url)
-        page = req.read()
+        try:
+            req = urlopen(url)
+            page = req.read()
+        except:
+            print 'error occur during connect to url %s' % url
+            continue
         page = page[page.find('<div id="search_results"><ul class="results">'):page.find('</ul></div>')]
         lineList = page.splitlines()
         lineList.pop(0)

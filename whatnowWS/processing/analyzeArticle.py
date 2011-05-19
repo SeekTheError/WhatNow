@@ -33,7 +33,7 @@ def perform(articleUrl) :
   #sometimes it can't connect to url, so surround with try statement 
   try:
     rawContent = urllib2.urlopen(articleUrl).read()
-  except (urllib2.URLError):
+  except:
     return
   content=extractContent(rawContent,a.source)
   a.content=content
