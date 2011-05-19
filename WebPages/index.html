@@ -10,28 +10,27 @@
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/whatnow.js"></script>
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/account.js"></script>
-<!--
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/swfobject.js"></script>
 
 	<script type="text/javascript">
-	swfobject.addDomLoadEvent(function() {
-		swfobject.embedSWF(
-			"{{ MEDIA_URL }}js/text_and_image_cloud.swf", "myContent4",
-			"500", "500",
-			"10", "{{ MEDIA_URL }}js/expressInstall.swf",
-			{
-				cloud_data:"{{ MEDIA_URL }}js/cloud_data.xml",
-				tcolor:"0xFA9100",
-				tcolor2:"0xFF5900",
-				hicolor:"0xA63A00",
-				tspeed:"250",
-				fontFace:"Impact"
-			},
-			{wmode: "window", menu: "false", quality: "best"}
-		);
-	});
+	function load_flash(src, target, w, h) {  
+		var flashvars = {
+			cloud_data:"../cloud_data2.xml",
+			tcolor:"0xFA9100",
+			tcolor2:"0xFF5900",
+			hicolor:"0xA63A00",
+			tspeed:"200",
+			fontFace:"Impact"
+		};
+		var params = {  
+			menu: "false",
+			quality : "best",
+			wmode : "opaque"  
+		};
+		var attributes = {};  
+		swfobject.embedSWF(src, target, w, h, "10", "expressInstall.swf", flashvars, params, attributes);
+	}
 	</script>
--->
 
 	<title>[CS457] Web-base Software Development - WhatNOW</title>
 
@@ -79,7 +78,7 @@
 							<div>
 								<span class="label">E-mail</span>
 								<input type="text" class="email" name="email" />
-								<span class="error">Invaild E-mail Address</span>
+								<span class="error">Invaild E-mail Address</span>z
 							</div>
 							<input class="submit" type="submit" value="Register" />
 							<a href="#"class="close"/><input type="button" name="Close" value="Close" /></a>
@@ -91,42 +90,38 @@
 			</div>
 		</div>
 		<div class="sub_body">
-			<div class="left_body">
+			<div class="top_body">
 				<div class="navi">
-					navigation_bar > keyword 
+					<ul id="breadcrumb">
+						<li><a href="#" title="Home"><img src="{{ MEDIA_URL }}img/home.png" alt="Home" class="home" /></a></li>
+						<li><a href="#" title="Tag Cloud">Keyword</a></li>
+						<li class="navi_rst">Timeline articles</li>
+					</ul>
 				</div>
 				<div class="search">
 					search
 				</div>
+			</div>
+<!--			<div class="btm_body"> 610 565 -->
 				<div class="content">
 					contents: cloud & time-line results
-<!--
-					<div style="width:500px; height:400px; float:left; border-style:solid; border-color:red; border-width:1px;">
-						<div id="myContent4">
-							<h1>Alternative content</h1>
-							<p><a href="http://www.adobe.com/go/getflashplayer" target="_blank">
-								<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
-							</a></p>
-						</div>
+					<div id="tag_cloud">
+						<script>load_flash("{{ MEDIA_URL }}swf/text_and_image_cloud.swf", "tag_cloud", 610, 550)</script>
 					</div>
--->
-					<iframe src="http://210.107.134.195/whatnow/etc/flashtagcloud/test.html" name="tagcloud" frameborder=0 bordercolor=black  width=510 height=410 marginheight=0 marginwidth=0 scrolling="no" scrollbars="no">
-					</iframe>
-
 				</div>
-			</div>
-			<div class="category">
-				category
-<!--				<div class="top_category">
-					My Topics
+				<div class="category">
+					category
+					<!--<div class="top_category">
+						My Topics
+					</div>
+					<div class="mid_category">
+						Popular Topics
+					</div>
+					</div class="btm_category">
+						All Topics
+					</div>-->
 				</div>
-				<div class="mid_category">
-					Popular Topics
-				</div>
-				</div class="btm_category">
-					All Topics
-				</div>-->
-			</div>
+<!--			</div>-->
 		</div>
 		<div class="footer">
 			<div style="float:left">CS457 Web-base Software Development</div>

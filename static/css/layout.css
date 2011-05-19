@@ -10,7 +10,7 @@ body {
 	border-width:	1px;
 	position:		relative;
 	width:			1002px;
-	height:			805px;
+	height:			815px;
 	top:			15px;
 	left:			50%;
 	margin:			0 0 0 -500;
@@ -36,7 +36,7 @@ body {
 	border-width:	1px;
 	position:		relative;
 	width:			990px;
-	height:			678px;
+	height:			686px;
 	margin:			0 5 5 5;
 	padding:		0 0 0 0;
 	background:		white;
@@ -56,44 +56,73 @@ body {
 }
 
 .logo {
+	border-style:	solid;
+	border-color:	orange;
+	border-width:	0px;
 	position:		relative;
 	width:			680px;
-	height:			54px;
-	margin:			5 5 0 10;
-	padding:		10 0 0 10;
+/*	height:			100%;*/
+	margin:			0 0 0 0;
+	padding:		13 0 10 10;
 	float:			left;
 }
 
 .account {
+	border-style:	solid;
+	border-color:	orange;
+	border-width:	1px;
 	position:		relative;
-	width:			270px;
-	height:			60px;
-	margin:			5 10 0 5;
-	padding:		5 0 0 0;
+	width:			260px;
+/*	height:			58px;*/
+	margin:			0 0 0 10;
+	padding:		0 0 0 0;
 	float:			right;
 }
 
 .left_body {
-/*	border-style:	solid;
+	border-style:	solid;
 	border-color:	red;
 	border-width:	1px;
-*/	position:		relative;
+	position:		relative;
 	width:			730px;
-	height:			668px;
-	margin:			3 3 3 3;
+/*	height:			668px;*/
+	margin:			0 0 0 0;
+	padding:		0 0 0 0;
 	float:			left;
+}
+
+.top_body {
+	border-style:	solid;
+	border-color:	blue;
+	border-width:	0px;
+	position:		relative;
+	width:			990px;
+	margin:			0;
+	padding:		0;
+	float:			left;
+}
+
+.btm_body {
+	border-style:	solid;
+	border-color:	green;
+	border-width:	1px;
+	position:		relative;
+	width:			970px;
+	margin:			0;
+	padding:		0;
+	clear:			left;
 }
 
 .navi {
 	border-style:	solid;
 	border-color:	black;
-	border-width:	1px;
+	border-width:	0px;
 	position:		relative;
-	width:			482px;
-	height:			50px;
-	margin:			0 0 0 0;
+	width:			715px;
+/*	height:			50px;*/
+	margin:			10 0 10 10;
 /*	padding:		15 5 5 13;*/
-	padding:		0 0 0 10;
+	padding:		0 0 0 0;
 	float:			left;
 }
 
@@ -102,11 +131,11 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			230px;
-	height:			50px;
-	margin:			0 0 0 4;
+	width:			240px;
+	height:			40px;
+	margin:			10 10 10 10;
 	padding:		0 0 0 0;
-	float:			left;
+	float:			right;
 	text-align:		center;
 }
 
@@ -115,13 +144,22 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			698px;
-	height:			585px;
-	margin:			3 0 0 0;
+	width:			686px;
+	height:			583px;
+	margin:			0 0 10 10;
 	padding:		15;
 	clear:			both;
 	float:			left;
-	z-index:		100;
+/*	text-align:		center;*/
+}
+
+#tag_cloud {
+	border-style:	solid;
+	border-color:	blue;
+	border-width:	1px;
+	position:		relative;
+	margin:			0;
+	padding:		0;
 }
 
 .category {
@@ -129,9 +167,9 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			238px;
-	height:			97.4%;
-	margin:			3 3 0 0;
-	padding:		5 5 5 5;
 	float:			right;
+	width:			240px;
+	height:			613px;
+	margin:			0 10 10 10;
+	padding:		0;
 }
