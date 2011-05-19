@@ -1,0 +1,46 @@
+
+#breadcrumb {
+/*	font: 16px Arial, Helvetica, sans-serif;*/
+	font-size: 15px;
+	font-family: verdana bold;
+	background-image:url('../img/bc_bg.png'); 
+	background-repeat:repeat-x;
+	height:40px;
+	line-height:40px;
+	color:#9b9b9b;
+	border:solid 1px #cacaca;
+	width:100%;
+	overflow:hidden;
+	margin:0px;
+	padding:0px;
+}
+
+#breadcrumb li {
+	list-style-type:none;
+	float:left;
+	padding-left:10px;
+}
+
+#breadcrumb a {
+	height:40px;
+	display:block;
+	background-image:url('../img/bc_separator.png'); 
+	background-repeat:no-repeat; 
+	background-position:right;
+	text-decoration: none;
+	padding-right: 20px;
+	color:#454545;
+}
+
+#breadcrumb a:hover {
+	color:#35acc5;
+}
+
+.home {
+	border:none;
+	margin: 10 0 0 0;
+}
+
+.navi_rst {
+	margin-right: 10px;
+}
