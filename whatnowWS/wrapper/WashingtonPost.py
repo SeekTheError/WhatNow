@@ -178,7 +178,7 @@ def wrapWPost(keyword, maxPage = 10, pastDay = 60):
         try:
             text = urlopen(url).read()
         except:
-            print 'error occur during connect to url %s' % url
+            print 'error occur during connect to url %s and read contents' % url
             continue
         try:
             wp.feed(text.decode('cp949', errors='replace'))

@@ -95,6 +95,7 @@ class Article(Document) :
   content=TextField()
   tags=ListField(TextField())
   isAnalyzed=BooleanField()
+  popularity=IntegerField()
   '''
   either kh, nyt, wp
   '''
@@ -107,6 +108,7 @@ class Article(Document) :
     if self.findById() == None:
       self.type=self.TYPE
       self.isAnalyzed=False
+      self.popularity=0
       self.store(getDb())
       
   def update(self):

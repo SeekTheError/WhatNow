@@ -15,7 +15,7 @@ def wrapNYTimes(keyword, maxPage = 10, pastDay = 30):
             req = urlopen(url)
             page = req.read()
         except:
-            print 'error occur during connect to url %s' % url
+            print 'error occur during connect to url %s and read contents' % url
             continue
         page = page[page.find('<div id="search_results"><ul class="results">'):page.find('</ul></div>')]
         lineList = page.splitlines()

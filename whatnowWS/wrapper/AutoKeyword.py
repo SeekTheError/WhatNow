@@ -9,7 +9,7 @@ def NYTMostSearched():
     try:
         text = urlopen(url).read()
     except:
-        print 'error occur during connect to url %s' % url
+        print 'error occur during connect to url %s and read contents' % url
         return
     index = text.find('<p class="summary">Keywords most frequently searched by NYTimes.com readers.</p>')
     text = text[index:text.find('</ol>',index)]
@@ -33,7 +33,7 @@ def NYTMostPopular():
     try:
         text = urlopen(url).read()
     except:
-        print 'error occur during connect to url %s' % url
+        print 'error occur during connect to url %s and read contents' % url
         return
     index = text.find('<h3>Most Popular Topics</h3>')
     text = text[index:text.find('</ol>',index)]
@@ -57,7 +57,7 @@ def WPTopics():
     try:
         text = urlopen(url).read()
     except:
-        print 'error occur during connect to url %s' % url
+        print 'error occur during connect to url %s and read contents' % url
         return
     index = text.find('<span class="label">In the News</span>')
     text = text[index:text.find('</ul>',index)]
@@ -90,7 +90,7 @@ def measurePop():
             url = 'http://www.washingtonpost.com/newssearch/search.html?st=%s' % (keyword[0])
             text = urlopen(url).read()
         except:
-            print 'error occur during connect to url %s' % url
+            print 'error occur during connect to url %s and read contents' % url
             continue
         index = text.find('<b id="resultsCount">')+1
         text = text[text.find('>',index)+1:text.find('</b>',index)]

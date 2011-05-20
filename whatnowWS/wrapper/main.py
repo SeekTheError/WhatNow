@@ -19,7 +19,7 @@ if __name__ == '__main__':
         #a.update()
         getDb().delete(a)
     keywordList = wrapKeyword()
-    for keyword in keywordList:
+    for keyword in keywordList[:15]:
         wrapNYTimes(keyword[0], 1)
         wrapWPost(keyword[0], 1)
     maestro.analyzeAll()

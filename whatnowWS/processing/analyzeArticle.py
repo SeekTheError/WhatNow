@@ -34,6 +34,7 @@ def perform(articleUrl) :
   try:
     rawContent = urllib2.urlopen(articleUrl).read()
   except:
+    print 'error occur during connect to url %s and read contents' % articleUrl
     return
   content=extractContent(rawContent,a.source)
   a.content=content
@@ -45,9 +46,12 @@ def perform(articleUrl) :
   a.tags=[]
   #keep only the 10 first tags
   while (i < 10 and i < len(words)) :
-    a.tags.append(words[i].decode('utf8'))
+    a.tags.append(words[i].decode('utf8', errors='replace'))
     i+=1
   print a.tags
+  #measure popularity
+  a.popularity=yahooResultNum(articleUrl)
+  print a.popularity
   a.isAnalyzed=True
   a.update()
   print a
@@ -57,7 +61,7 @@ def perform(articleUrl) :
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
   
 def extractContent(rawHtml,source):
-  soup = BeautifulSoup(rawHtml.decode('utf8'))
+  soup = BeautifulSoup(rawHtml.decode('utf8', errors='replace'))
   if source == 'kh':
     return extractContentKoreanHerald(soup)
   if source == 'nyt':
@@ -105,3 +109,21 @@ def extractContentWashingtonPost(soup):
   cleanarticle = cleanarticle.encode('cp949', errors='replace')
   return cleanarticle
   
+
+def yahooResultNum(articleUrl):
+    url = 'http://search.yahoo.com/search?p=%s' % '"'+articleUrl+'"'
+    try:
+        text = urlopen(url).read()
+    except:
+        print 'error occur during connect to url %s and read contents' % url
+        return 0
+    index = text.find('<strong id="resultCount">')+1
+    num = text[text.find('>', index)+1:text.find('</strong>',index)]
+    while 1:
+        index=num.find(',')
+        if index==-1:
+            break
+        num=num[:index]+num[index+1:]
+    return int(num)
+
+
