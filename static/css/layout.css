@@ -156,7 +156,7 @@ body {
 #tag_cloud {
 	border-style:	solid;
 	border-color:	blue;
-	border-width:	1px;
+	border-width:	0px;
 	position:		relative;
 	margin:			0;
 	padding:		0;
