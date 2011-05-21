@@ -95,6 +95,8 @@ class Article(Document) :
   content=TextField()
   tags=ListField(TextField())
   isAnalyzed=BooleanField()
+  popularity=IntegerField()
+  keyword=TextField()
   '''
   either kh, nyt, wp
   '''
@@ -107,6 +109,7 @@ class Article(Document) :
     if self.findById() == None:
       self.type=self.TYPE
       self.isAnalyzed=False
+      self.popularity=0
       self.store(getDb())
       
   def update(self):
@@ -118,6 +121,35 @@ class Article(Document) :
       return None
     elif len(view) == 1:
       for u in view : return Article.load(getDb(),u.id)
+
+
+class Keyword(Document) :
+  _id=TextField()
+  popularity=IntegerField()
+  
+  type=TextField()
+  TYPE='keyword'
+
+ 
+  def create(self) :
+    if self.findById() == None :
+      self.popularity=0
+      self.type=self.TYPE
+      self.store(getDb())
+      
+      
+  def update(self) :
+    self.store(getDb())
+    
+
+  def findById(self) :
+    view=dblayer.view("keyword/id",self._id)
+    if len(view) == 0 :
+      return None
+    elif len(view) == 1:
+      for u in view : return Article.load(getDb(),u.id)
+
+
 
 class IllegalAttempt(Exception) :
   pass

@@ -3,8 +3,10 @@ sys.path.insert(0, '..')
 from HTMLParser import HTMLParser
 from urllib import urlopen
 from couchdb import Server
-from couchdb.mapping import Document, TextField, IntegerField, DateField
-from couchdbinterface import entities
+from couchdb.mapping import Document, TextField, IntegerField, DateField, date
+from couchdbinterface.entities import *
+from couchdbinterface import dblayer
+from datetime import timedelta
 
 class WPostParser(HTMLParser):
     def __init__(self):
@@ -12,7 +14,6 @@ class WPostParser(HTMLParser):
         self.queue = []
         self.isResult = False
         self.isTitle = False
-        self.isDate = False
         self.isSumm = False
         self.numDiv = 0
         
@@ -21,10 +22,7 @@ class WPostParser(HTMLParser):
             if (tag == 'div'):
                 self.numDiv += 1
             elif (tag == 'p' and attrs):
-                if (attrs[0][0] == 'class' and attrs[0][1] == 'kicker'):
-                    self.isDate = True
-                    self.queue.append('<date>')
-                elif (attrs[0][0] == 'class' and attrs[0][1] == 'teaser'):
+                if (attrs[0][0] == 'class' and attrs[0][1] == 'teaser'):
                     self.isSumm = True
                     self.queue.append('<summ>')
             elif (tag == 'h2'):
@@ -48,10 +46,7 @@ class WPostParser(HTMLParser):
                 else:
                     self.numDiv -= 1
             elif (tag == 'p'):
-                if (self.isDate):
-                    self.isDate = False
-                    self.queue.append('</date>')
-                elif (self.isSumm):
+                if (self.isSumm):
                     self.isSumm = False
                     self.queue.append('</summ>')
             elif (tag == 'h2' and self.isTitle):
@@ -59,44 +54,46 @@ class WPostParser(HTMLParser):
                 self.queue.append('</title>')
             
     def handle_data(self, data):
-        if(self.isDate or self.isSumm or self.isTitle):
+        if(self.isSumm or self.isTitle):
             self.queue.append(data)
     
     def handle_charref(self, name):
         if (self.isTitle or self.isSumm):
             self.queue.append('&#'+name+';')
             
-    def storeArticle(self, keyword):
+    def storeArticle(self, keyword, searchDate):
         while(len(self.queue) != 0):
             article = self.parseArticle()
             if (article == None):
                 continue
+            article.date = searchDate
+            article.keyword = keyword
             article.source = 'wp'
+            print article._id
+            print article.title
+            print article.extract
+            print article.date
             article.create()
             
     def parseArticle(self):
         title = ''
-        date = ''
         url = ''
         summ = ''
         while (True):
             elem = self.queue.pop(0)
             if (elem == '<article>'):
                 continue
-            elif (elem == '<date>'):
-                date = self.parseDate()
             elif (elem == '<title>'):
                 (title, url) = self.parseTitle()
             elif (elem == '<summ>'):
                 summ = self.parseSumm()
             elif (elem == '</article>'):
                 break
-        if (date == ''):
+        if url=='':
             return None
         else:
-            article = entities.Article()
+            article = Article()
             article.title = title
-            article.date = date
             article._id = url
             article.link = url
             article.extract = summ
@@ -112,7 +109,6 @@ class WPostParser(HTMLParser):
                 date += elem
         date = date[date.find('|')+1:]
         date = self.deleteSpace(date) 
-        #print 'date: ' +date
         return DateField()._to_python(date)
 
     def parseTitle(self):
@@ -127,8 +123,6 @@ class WPostParser(HTMLParser):
             else:
                 title += elem
         title = self.deleteSpace(title)
-        #print 'title: '+title
-        #print 'url: '+url
         return (title, url)
     
     def parseSumm(self):
@@ -140,7 +134,6 @@ class WPostParser(HTMLParser):
             else:
                 summ += elem
         summ.strip()
-        #print 'summ: '+summ
         return summ
     
     def deleteSpace(self, string):
@@ -170,26 +163,45 @@ class WPostParser(HTMLParser):
                 break
         return string
 
-def wrapWPost(keyword, maxPage = 10, pastDay = 60):
-    for i in range(maxPage):
-        print 'wrapping WPost : page '+str(i+1)
-        wp = WPostParser()
-        url = 'http://www.washingtonpost.com/newssearch/search.html?st=%s&cp=%d&scoa=Past+%d+days' % (keyword, i+1, pastDay)
-        try:
-            text = urlopen(url).read()
-        except:
-            print 'error occur during connect to url %s' % url
-            continue
-        try:
-            wp.feed(text.decode('cp949', errors='replace'))
-        except:
-            print 'error occur during parsing %s' % url
-            continue
-        wp.storeArticle(keyword)
-        wp.close()
+def wrapWPost(keyword, maxPage = 1, pastDay = 7):
+    searchDate = date.today()
+    oneDay = timedelta(days=1)
+    for i in range(pastDay):
+        y = str(searchDate.year)
+        m = str(searchDate.month)
+        d = str(searchDate.day)
+        if (len(m)==1):
+            m = '0'+m
+        if (len(d)==1):
+            d = '0'+d
+        sd = y+m+d
+        for j in range(maxPage):
+            wp = WPostParser()
+            url = 'http://www.washingtonpost.com/newssearch/search.html?sa=as&sd=%s&ed=%s&st=%s&cp=%d' % (sd, sd, keyword, j+1)
+            url += '&fa_1_sourcenavigator=%22The+Washington+Post%22&fa_1_sourcenavigator=washingtonpost.com&fa_1_mediatypenavigator=^Articles%24'
+            try:
+                text = urlopen(url).read()
+            except:
+                print 'error occur during connect to url %s and read contents' % url
+                continue
+            try:
+                wp.feed(text.decode('cp949', errors='replace'))
+            except:
+                print 'error occur during parsing %s' % url
+                continue
+            print 'wrapping WashingtonPost : '+str(searchDate)+', page '+str(j+1)
+            print url
+            wp.storeArticle(keyword, searchDate)
+            wp.close()
+        searchDate -= oneDay
     print 'done'
 
 #################TEST####################
 if __name__ == '__main__':
-    keyword = 'japan'
-    wrapWPost (keyword, 1)
+    view=dblayer.view("article/test")
+    for u in view :
+        a = Article(u.id)
+        a=a.findById()
+        getDb().delete(a)
+    keyword = 'laden'
+    wrapWPost (keyword, 1, 3)

@@ -8,4 +8,3 @@ def view(request) :
   context=RequestContext(request)
   context=checkSession(request,context)
   return HttpResponse(t.render(context))
-
