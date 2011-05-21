@@ -17,7 +17,9 @@ urlpatterns = patterns('',
     (r'^security/signout/$', 'security.securitycontroller.signout'),
     
     (r'^keywords/$', 'controller.keywords.get'),
-  
+    
+    (r'^content/$', 'controller.contentcontroller.view'),  
+    (r'^timeline/$', 'controller.timelinecontroller.view'),
      
     
     #For static media files

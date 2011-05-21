@@ -27,7 +27,7 @@ body {
 	font-size:		18px;
 }
 
-#msg {
+.msg {
 	font-family:verdana;
-	font-size:5px;	
+	font-size:12px;	
 }

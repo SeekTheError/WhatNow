@@ -67,6 +67,10 @@ body {
 	float:			left;
 }
 
+.msg {
+	margin:			4 0 4 0px;
+}
+
 .account {
 	border-style:	solid;
 	border-color:	orange;

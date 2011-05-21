@@ -19,7 +19,7 @@
 			tcolor:"0xFA9100",
 			tcolor2:"0xFF5900",
 			hicolor:"0xA63A00",
-			tspeed:"200",
+			tspeed:"100",
 			fontFace:"Impact"
 		};
 		var params = {  
@@ -42,7 +42,9 @@
 				WhatNOW?!
 			</div>
 			<div class="account" align="left">
+			
 			{% if not sessionIsOpen%}
+			
 			<div class="user_box">
 				<a href="#d_login" name="modal">
 					<input class="button black" type="button" value="Login" name="Login"/>
@@ -96,21 +98,28 @@
 						</form>
 					</div>
 					<!-- End of Register Dialog -->
-					<div id="msg">
+					<div class="msg">
 						{% if message %}
 						{{ message }}
 						{% endif %}	
 					</div>
 				</div>
 			</div>
+			
 			{% else %}
 			
-			<p>Hello {{ user.login }}</p>
+			<div class="msg">
+				Welcome <b>{{ user.login }}</b>!
+			</div>
+			<div align="right">
 			<form action="/security/signout/" method="POST">
 				{% csrf_token %}
-				<input  type="submit" value="Sign out"/>
+				<input type="submit" class="button black" value="Sign out"/>
 			</form>
+			</div>
+			
 			{% endif %}
+			
 			</div>
 		</div>
 		<div class="sub_body">
@@ -128,9 +137,8 @@
 			</div>
 				<div class="content">
 					contents: cloud & time-line results
-					<div id="tag_cloud">
-						<script>load_flash("{{ MEDIA_URL }}swf/text_and_image_cloud.swf", "tag_cloud", 610, 550)</script>
-					</div>
+					<iframe src="/content/" name="content" frameborder=0 bordercolor=black width=675 height=575 marginheight=0 marginwidth=0>
+					</iframe>
 				</div>
 				<div class="category">
 					category
