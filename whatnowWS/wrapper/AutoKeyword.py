@@ -131,7 +131,7 @@ def toXML():
         node.appendChild(keyword)
         root.appendChild(node)
     print doc.toprettyxml()
-    doc.writexml(file('cloud_data.xml', 'w'))
+    doc.writexml(file('../static/cloud_data.xml', 'w'))
 
 #Cmp function to sorting keywrodList by popularity
 def cmp(e1, e2):
