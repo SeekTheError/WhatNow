@@ -46,9 +46,9 @@ from util.encode import encode
 
 def openSession(request,user) :
   t = loader.get_template('index.html')
-  if user.sessionId.startswith('XXX'):
+  if not user.sessionId or user.sessionId.startswith('XXX'):
     print 'trying to open session for ',user.login
-    user.sessionId= encode(user.login+user.email+str(sessionExpire)+str(uuid.uuid1()))
+    user.sessionId= encode(user.login+user.email+str(uuid.uuid1()))
     user.update()
   else :
     print 'returning the existing opened session'
