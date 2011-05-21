@@ -129,7 +129,7 @@ def toXML():
         node.appendChild(keyword)
         root.appendChild(node)
     print doc.toprettyxml()
-    doc.writexml(file('../../static/cloud_data.xml', 'w'))
+    doc.writexml(file('../static/cloud_data.xml', 'w'))    
 
 #Cmp function to sorting keywrodList by popularity
 def cmp(e1, e2):
@@ -148,8 +148,8 @@ def wrapKeyword():
     #WPTopics()    not good
     #measurePop()    not good, number of article does not mean popularity of keyword
     toXML()
-    print keywordList
-    return keywordList
+    #print keywordList
+    #return keywordList
 
 
 #################TEST####################
