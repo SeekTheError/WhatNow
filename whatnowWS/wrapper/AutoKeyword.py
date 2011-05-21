@@ -3,6 +3,10 @@ from xml.dom.minidom import *
 from HTMLParser import HTMLParser
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 
+import sys
+sys.path.insert(0, '..')
+from couchdbinterface.entities import Keyword
+
 #Sotre keywords = (keyword, popularity)
 keywordList = []
 maxKeywordNum = 20
@@ -52,7 +56,6 @@ def NYTMostPopular():
         keyword = text[start:end].strip()
         if (not checkDuplication(keyword)):
             keywordList.append([keyword, 0])
-            print keyword
         text = text[end:]
 
 #Gather keywords which is shown in main page from wp.
@@ -77,7 +80,6 @@ def WPTopics():
         keyword = text[start:end].strip()
         if (not checkDuplication(keyword)):
             keywordList.append([keyword, 0])
-            print keyword
         text = text[end:]
 
 #Check whether already same keyword exists in the keywordList.
@@ -140,6 +142,14 @@ def cmp(e1, e2):
     else:
         return 1
 
+#store keywords in db
+def storeKeyword():
+    for u in keywordList:
+        keyword = Keyword()
+        keyword._id=u[0]
+        keyword.popularity=u[1]
+        keyword.create()
+
 #Gather keywords from sources, measure popularity, sort it, convert to XML file and return.
 def wrapKeyword():
     global keywordList
@@ -148,6 +158,7 @@ def wrapKeyword():
     #WPTopics()    not good
     #measurePop()    not good, number of article does not mean popularity of keyword
     toXML()
+    storeKeyword()
     print keywordList
     return keywordList
 

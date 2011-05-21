@@ -9,9 +9,14 @@ from datetime import timedelta
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 
 #search 'keyword' during 'pastDay' for 'maxPage' which have 'numOfArt' article in 1 page
-def wrapNYTimes(keyword, maxPage = 5, pastDay = 7):
+def wrapNYTimes(keyword, maxPage = 1, pastDay = 7):
     searchDate = date.today()
     oneDay = timedelta(days=1)
+    while 1:
+        index = keyword.find(' ')
+        if index==-1:
+            break
+        keyword = keyword[:index] + '%20' + keyword[index+1:]
     for i in range(pastDay):
         y = searchDate.year
         m = str(searchDate.month)
@@ -27,7 +32,7 @@ def wrapNYTimes(keyword, maxPage = 5, pastDay = 7):
         except:
             print 'error occur during connect to url %s and read contents' % url
             continue
-        soup = BeautifulSoup(page.decode('utf8', errors='replace'))
+        soup = BeautifulSoup(page)
         n = resultNum(soup)
         if n>maxPage*10:
             pageNum = maxPage
@@ -44,14 +49,19 @@ def wrapNYTimes(keyword, maxPage = 5, pastDay = 7):
             print 'wrapping NYTimes : '+str(searchDate)+', page '+str(j+1)
             print url
             soup = BeautifulSoup(page.decode('utf8', errors='replace'))
-            storeArticles(soup, searchDate)
+            storeArticles(soup, keyword, searchDate)
         searchDate -= oneDay
     print 'done'
 
 #parse result page and store articles in couchdb
-def storeArticles(soup, searchDate):
+def storeArticles(soup, keyword, searchDate):
     result = soup('ol', {'class':'srchSearchResult'})
-    soup2 = BeautifulSoup(result[1].prettify())
+    if len(result)==1:
+        soup2 = BeautifulSoup(result[0].prettify())
+    elif len(result)==2:
+        soup2 = BeautifulSoup(result[1].prettify())
+    else:
+        return
     titleList = soup2('h3')
     summaryList = soup2('p', {'class':'summary'})
     urlList = soup2('a')
@@ -64,7 +74,12 @@ def storeArticles(soup, searchDate):
         article._id = url
         article.link = article._id
         article.extract = summaryList[i].text
+        article.keyword = keyword
         article.source = 'nyt'
+        print article._id
+        print article.title
+        print article.extract
+        print article.date
         article.create()
     
 #return num of search result
@@ -83,4 +98,4 @@ if __name__ == '__main__':
         a = Article(u.id)
         a=a.findById()
         getDb().delete(a)
-    wrapNYTimes('laden', 1, pastDay=1)
+    wrapNYTimes('laden', 1, pastDay=3)
