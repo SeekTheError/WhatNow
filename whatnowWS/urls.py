@@ -15,6 +15,8 @@ urlpatterns = patterns('',
     
     (r'^security/signin/$', 'security.securitycontroller.signin'),
     (r'^security/signout/$', 'security.securitycontroller.signout'),
+    
+    (r'^keywords/$', 'controller.keywords.get'),
   
      
     
