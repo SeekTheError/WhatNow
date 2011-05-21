@@ -23,11 +23,7 @@ def createTestArticle() :
   a.title="TEST"
   a.create()
   return a
-  
-  
-if __name__ == '__main__':
-  createTestArticle()
-  analyzeArticle.perform('http://www.koreaherald.com/lifestyle/Detail.jsp?newsMLId=20110503000756')
+
   
   
 def analyzeAll():
@@ -40,4 +36,8 @@ def analyzeAll():
   for u in view :
     analyzeArticle.perform(u.id)
   
+
   
+  
+if __name__ == '__main__':
+  analyzeAll()
