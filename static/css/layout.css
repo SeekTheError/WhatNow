@@ -67,6 +67,10 @@ body {
 	float:			left;
 }
 
+.msg {
+	margin:			4 0 4 0px;
+}
+
 .account {
 	border-style:	solid;
 	border-color:	orange;
@@ -75,7 +79,7 @@ body {
 	width:			260px;
 /*	height:			58px;*/
 	margin:			0 0 0 10;
-	padding:		0 0 0 0;
+	padding:		5 0 0 0;
 	float:			right;
 }
 
@@ -156,7 +160,7 @@ body {
 #tag_cloud {
 	border-style:	solid;
 	border-color:	blue;
-	border-width:	1px;
+	border-width:	0px;
 	position:		relative;
 	margin:			0;
 	padding:		0;

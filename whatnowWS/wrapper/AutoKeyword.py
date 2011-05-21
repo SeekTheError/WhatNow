@@ -123,10 +123,20 @@ def toXML():
         else:
             break
         node = doc.createElement('a')
-        node.setAttributeNS(None, 'href', '#')
-        node.setAttributeNS(None, 'style', 'font-size: 20pt;')
-        node.setAttributeNS(None, 'color', '0xccff00')
-        node.setAttributeNS(None, 'hicolor', '0x123456')
+        node.setAttributeNS(None, 'href', '/timeline/?key='+keyword[0])
+        #node.setAttributeNS(None, 'target', 'content')
+        if (i <= 5):
+            node.setAttributeNS(None, 'style', 'font-size: 15pt;')
+            node.setAttributeNS(None, 'color', '0xff0099')
+            node.setAttributeNS(None, 'hicolor', '0x14d3ff')
+        elif (i > 5 and i <= 13):
+            node.setAttributeNS(None, 'style', 'font-size: 11pt;')
+            #node.setAttributeNS(None, 'color', '0xccff00')
+            node.setAttributeNS(None, 'hicolor', '0xff1d07')
+        else:
+            node.setAttributeNS(None, 'style', 'font-size: 7pt;')
+            node.setAttributeNS(None, 'color', '0x505050')
+            node.setAttributeNS(None, 'hicolor', '0x123456')                                    
         keyword = doc.createTextNode(keyword[0])
         node.appendChild(keyword)
         root.appendChild(node)
