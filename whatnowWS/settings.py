@@ -17,7 +17,7 @@ STATIC_MEDIA_ROOT = PROJECT_ROOT + '/static'
 
 print STATIC_MEDIA_ROOT
 
-ACTIVATION_LINK_BASE_URL='http://localhost:8002/register/'
+ACTIVATION_LINK_BASE_URL='http://localhost:8000/register/'
 TEMPLATE_DEBUG = DEBUG
 MANAGERS = ADMINS
 
@@ -106,7 +106,7 @@ and the EMAIL_USE_TLS setting controls whether a secure connection is used.
 '''
 EMAIL_HOST= 'smtp.gmail.com'
 EMAIL_PORT= '25'
-EMAIL_HOST_USER = 'kuestions.kaist@gmail.com'
-EMAIL_HOST_PASSWORD = 'kuestions123456'
+EMAIL_HOST_USER = 'whatnow.kaist@gmail.com'
+EMAIL_HOST_PASSWORD = 'whatnow123456'
 EMAIL_USE_TLS = True
 

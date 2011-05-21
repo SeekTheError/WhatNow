@@ -15,7 +15,7 @@
 	<script type="text/javascript">
 	function load_flash(src, target, w, h) {  
 		var flashvars = {
-			cloud_data:"../cloud_data2.xml",
+			cloud_data:"../cloud_data.xml",
 			tcolor:"0xFA9100",
 			tcolor2:"0xFF5900",
 			hicolor:"0xA63A00",
@@ -43,24 +43,26 @@
 			</div>
 			<div class="account" align="left">
 			{% if not sessionIsOpen%}
-				<a href="#d_login" name="modal"><input type='button' name='Login' value='Login'/></a><br>
-				<a href="#d_register" name="modal"><input type='button' name='Register' value='Register'/></a>
-
+			<div class="user_box">
+				<a href="#d_login" name="modal">
+					<input class="button black" type="button" value="Login" name="Login"/>
+				</a>
+				<a href="#d_register" name="modal">
+					<input class="button black" type="button" value="Register" name="Register"/>
+				</a>
 				<div id="boxes">
 					<!-- Start of Login Dialog -->  
 					<div id="d_login" class="window">
-					<form action="/security/signin/" method="POST">
-						<div class="d-header">
-						
-						{% csrf_token %}
-							<input type="text" value="login" name="login" onclick="this.value=''"/><br/>
-							<input type="password" value="password" name="password" onclick="this.value=''"/>    
-						
-						</div>
-						
-						<div class="d-blank"></div>
-						<div class="d-login"><input type="submit" alt="Login" title="Login" src="{{ MEDIA_URL }}img/login-button.png"/>
-						</div>
+						<form action="/security/signin/" method="POST">
+							{% csrf_token %}
+							<div class="d-header">
+								<input type="text" value="login" name="login" onclick="this.value=''"/><br/>
+								<input type="password" value="password" name="password" onclick="this.value=''"/>    
+							</div>
+							<div class="d-blank"></div>
+							<div class="d-login">
+								<input type="image" alt="Login" title="Login" src="{{ MEDIA_URL }}img/login-button.png"/>
+							</div>
 						</form>
 					</div>
 					<!-- End of Login Dialog -->  
@@ -94,9 +96,15 @@
 						</form>
 					</div>
 					<!-- End of Register Dialog -->
-					
+					<div id="msg">
+						{% if message %}
+						{{ message }}
+						{% endif %}	
+					</div>
 				</div>
-			{% else %} 
+			</div>
+			{% else %}
+			
 			<p>Hello {{ user.login }}</p>
 			<form action="/security/signout/" method="POST">
 				{% csrf_token %}
@@ -115,9 +123,7 @@
 					</ul>
 				</div>
 				<div class="search">
-					{% if message %}
-					<p>{{ message }}</p>
-					{% endif %}
+					search
 				</div>
 			</div>
 				<div class="content">

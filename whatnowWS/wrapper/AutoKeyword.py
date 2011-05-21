@@ -17,7 +17,7 @@ def NYTMostSearched():
     except:
         print 'error occur during connect to url %s and read contents' % url
         return
-    soup = BeautifulSoup(text.decode('utf8', errors='replace'))
+    soup = BeautifulSoup(text.decode('utf8'))
     result = soup('div', {'class': 'result'})
     for elem in result:
         keyword = elem.text
@@ -122,14 +122,14 @@ def toXML():
             break
         node = doc.createElement('a')
         node.setAttributeNS(None, 'href', '#')
-        node.setAttributeNS(None, 'style', 'font-size: 20pt;')
-        node.setAttributeNS(None, 'color', '0xccff00')
-        node.setAttributeNS(None, 'hicolor', '0x123456')
+        node.setAttributeNS(None, 'style', 'font-size: 10pt;')
+        node.setAttributeNS(None, 'color', '0xff0099')
+        node.setAttributeNS(None, 'hicolor', '0x000099')
         keyword = doc.createTextNode(keyword[0])
         node.appendChild(keyword)
         root.appendChild(node)
     print doc.toprettyxml()
-    doc.writexml(file('cloud_data.xml', 'w'))
+    doc.writexml(file('../../static/cloud_data.xml', 'w'))
 
 #Cmp function to sorting keywrodList by popularity
 def cmp(e1, e2):

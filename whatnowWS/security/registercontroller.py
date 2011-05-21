@@ -60,7 +60,7 @@ from hashlib import sha1
 def sendActivationMail(login,email) :   
   shaSource= login + email
   code=encode(shaSource)
-  subject='Activation mail for Kuestions!'
+  subject='Activation mail for WhatNow!'
   message= 'Please follow this link to activate your account'
   message+= '\n'+settings.ACTIVATION_LINK_BASE_URL+code
   sendMail(subject,message,email)
