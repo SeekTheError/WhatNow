@@ -12,19 +12,18 @@ First delete all existing articles.
 Wrapping keywords from topics.nytimes.com
 Gathering articles from nyt and wp.
 """
-if __name__ == '__main__':
-    view=dblayer.view("article/test")
-    for u in view :
-        a = Article(u.id)
-        a=a.findById()
-        getDb().delete(a)
+
+def perform():
     keywordList = wrapKeyword()
-    for i in range(1):
+    for i in range(50):
         if(i<len(keywordList)):
             keyword = keywordList[i]
         else:
             break
         #keyword, maxPage, past day
-        wrapNYTimes(keyword[0], 1, 3)
-        wrapWPost(keyword[0], 1, 3)
+        wrapNYTimes(keyword[0])
+        wrapWPost(keyword[0])
     maestro.analyzeAll()
+
+if __name__ == '__main__':
+    perform()
