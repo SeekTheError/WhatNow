@@ -12,7 +12,9 @@ urlpatterns = patterns('',
     
     (r'^register/$', 'security.registercontroller.register'),
     (r'^register/(?P<code>\w+)$', 'security.registercontroller.activate'),
-
+    
+    (r'^security/signin/$', 'security.securitycontroller.signin'),
+    (r'^security/signout/$', 'security.securitycontroller.signout'),
   
      
     

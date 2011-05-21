@@ -1,7 +1,8 @@
 import sys
 sys.path.insert(0, '..')
-import NYTimes
-import WashingtonPost
+from NYTimes import wrapNYTimes
+from WashingtonPost import wrapWPost
+from AutoKeyword import wrapKeyword
 from processing import maestro
 from couchdbinterface import dblayer
 from couchdbinterface.entities import *
@@ -17,6 +18,13 @@ if __name__ == '__main__':
         #a.isAnalyzed = False
         #a.update()
         getDb().delete(a)
-    NYTimes.wrapNYTimes('laden', 10)
-    WashingtonPost.wrapWPost('laden', 10)
+    keywordList = wrapKeyword()
+    for i in range(10):
+        if(i<len(keywordList)):
+            keyword = keywordList[i]
+        else:
+            break
+        #keyword, maxPage, past day
+        wrapNYTimes(keyword[0], 1, 1)
+        wrapWPost(keyword[0], 1, 1)
     maestro.analyzeAll()

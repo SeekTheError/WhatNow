@@ -34,7 +34,7 @@ if __name__ == '__main__':
   perform(documentList)
   
 def perform(text) : 
-  text=text.encode('utf8')
+  text=text.encode('utf8', errors='replace')
   documentList = []
   for line in text.split(','):
   

@@ -42,32 +42,41 @@
 				WhatNOW?!
 			</div>
 			<div class="account" align="left">
+			 {% if not sessionIsOpen%}
 				<a href="#d_login" name="modal"><input type='button' name='Login' value='Login'/></a><br>
 				<a href="#d_register" name="modal"><input type='button' name='Register' value='Register'/></a>
 
 				<div id="boxes">
 					<!-- Start of Login Dialog -->  
 					<div id="d_login" class="window">
+					<form action="/security/signin/" method="POST">
 						<div class="d-header">
-							<input type="text" value="username" onclick="this.value=''"/><br/>
-							<input type="password" value="Password" onclick="this.value=''"/>    
+						
+						{% csrf_token %}
+							<input type="text" value="login" name="login" onclick="this.value=''"/><br/>
+							<input type="password" value="password" name="password" onclick="this.value=''"/>    
+						
 						</div>
+						
 						<div class="d-blank"></div>
-						<div class="d-login"><input type="image" alt="Login" title="Login" src="{{ MEDIA_URL }}img/login-button.png"/></div>
+						<div class="d-login"><input type="submit" alt="Login" title="Login" src="{{ MEDIA_URL }}img/login-button.png"/>
+						</div>
+						</form>
 					</div>
 					<!-- End of Login Dialog -->  
 
 					<!-- Start of Register Dialog -->
 					<div id="d_register" class="window">
-						<form>
+						<form action="/register/" method="POST">
+						{% csrf_token %}
 							<div>
 								<span class="label">User ID</span>
-								<input type="text" class="userid" name="userid" />
+								<input type="text" class="userid" name="registerLogin" />
 								<span class="error">Only numeral, character or _(underscore)</span>
 							</div>
 							<div>
 								<span class="label">Password</span>
-								<input type="password" class="password" name="password" />
+								<input type="password" class="password" name="registerPassword" />
 								<span class="error">Cannot be blank</span>
 							</div>
 							<div>
@@ -77,7 +86,11 @@
 							</div>
 							<div>
 								<span class="label">E-mail</span>
+<<<<<<< HEAD
 								<input type="text" class="email" name="email" />
+=======
+								<input type="text" class="email" name="registerEmail" />
+>>>>>>> df911b300f4073dc0c84b902856ed4732f434193
 								<span class="error">Invaild E-mail Address</span>
 							</div>
 							<input class="submit" type="submit" value="Register" />
@@ -85,7 +98,15 @@
 						</form>
 					</div>
 					<!-- End of Register Dialog -->
+					
 				</div>
+<<<<<<< HEAD
+=======
+          {% else %} 
+					<p>Hello {{ user.login }}</p>
+					<form action="/security/signout/" method="POST">{% csrf_token %}<input  type="submit" value="Sign out"/> </form>
+					{% endif %}
+>>>>>>> df911b300f4073dc0c84b902856ed4732f434193
 			</div>
 		</div>
 		<div class="sub_body">
@@ -98,7 +119,9 @@
 					</ul>
 				</div>
 				<div class="search">
-					search
+					{% if message %}
+					<p>{{ message }}</p>
+					{% endif %}
 				</div>
 			</div>
 				<div class="content">
