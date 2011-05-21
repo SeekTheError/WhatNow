@@ -42,7 +42,7 @@
 				WhatNOW?!
 			</div>
 			<div class="account" align="left">
-			 {% if not sessionIsOpen%}
+			{% if not sessionIsOpen%}
 				<a href="#d_login" name="modal"><input type='button' name='Login' value='Login'/></a><br>
 				<a href="#d_register" name="modal"><input type='button' name='Register' value='Register'/></a>
 
@@ -86,11 +86,7 @@
 							</div>
 							<div>
 								<span class="label">E-mail</span>
-<<<<<<< HEAD
-								<input type="text" class="email" name="email" />
-=======
 								<input type="text" class="email" name="registerEmail" />
->>>>>>> df911b300f4073dc0c84b902856ed4732f434193
 								<span class="error">Invaild E-mail Address</span>
 							</div>
 							<input class="submit" type="submit" value="Register" />
@@ -100,13 +96,13 @@
 					<!-- End of Register Dialog -->
 					
 				</div>
-<<<<<<< HEAD
-=======
-          {% else %} 
-					<p>Hello {{ user.login }}</p>
-					<form action="/security/signout/" method="POST">{% csrf_token %}<input  type="submit" value="Sign out"/> </form>
-					{% endif %}
->>>>>>> df911b300f4073dc0c84b902856ed4732f434193
+			{% else %} 
+			<p>Hello {{ user.login }}</p>
+			<form action="/security/signout/" method="POST">
+				{% csrf_token %}
+				<input  type="submit" value="Sign out"/>
+			</form>
+			{% endif %}
 			</div>
 		</div>
 		<div class="sub_body">
