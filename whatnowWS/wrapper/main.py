@@ -8,23 +8,23 @@ from couchdbinterface import dblayer
 from couchdbinterface.entities import *
 
 """
-This file is made only for testing
+First delete all existing articles.
+Wrapping keywords from topics.nytimes.com
+Gathering articles from nyt and wp.
 """
 if __name__ == '__main__':
     view=dblayer.view("article/test")
     for u in view :
         a = Article(u.id)
         a=a.findById()
-        #a.isAnalyzed = False
-        #a.update()
         getDb().delete(a)
     keywordList = wrapKeyword()
-    for i in range(10):
+    for i in range(1):
         if(i<len(keywordList)):
             keyword = keywordList[i]
         else:
             break
         #keyword, maxPage, past day
-        wrapNYTimes(keyword[0], 1, 1)
-        wrapWPost(keyword[0], 1, 1)
+        wrapNYTimes(keyword[0], 1, 3)
+        wrapWPost(keyword[0], 1, 3)
     maestro.analyzeAll()
