@@ -48,7 +48,7 @@ def wrapNYTimes(keyword, maxPage = 1, pastDay = 7):
                 continue
             print 'wrapping NYTimes : '+str(searchDate)+', page '+str(j+1)
             print url
-            soup = BeautifulSoup(page.decode('utf8', errors='replace'))
+            soup = BeautifulSoup(page.decode('utf8', 'replace'))
             storeArticles(soup, keyword, searchDate)
         searchDate -= oneDay
     print 'done'

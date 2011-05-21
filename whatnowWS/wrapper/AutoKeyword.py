@@ -21,7 +21,7 @@ def NYTMostSearched():
     except:
         print 'error occur during connect to url %s and read contents' % url
         return
-    soup = BeautifulSoup(text.decode('utf8', errors='replace'))
+    soup = BeautifulSoup(text.decode('utf8'))
     result = soup('div', {'class': 'result'})
     for elem in result:
         keyword = elem.text
@@ -131,7 +131,7 @@ def toXML():
         node.appendChild(keyword)
         root.appendChild(node)
     print doc.toprettyxml()
-    doc.writexml(file('../static/cloud_data.xml', 'w'))
+    doc.writexml(file('../../static/cloud_data.xml', 'w'))
 
 #Cmp function to sorting keywrodList by popularity
 def cmp(e1, e2):
@@ -148,7 +148,7 @@ def storeKeyword():
         keyword = Keyword()
         keyword._id=u[0]
         keyword.popularity=u[1]
-        keyword.create()
+        #keyword.create()
 
 #Gather keywords from sources, measure popularity, sort it, convert to XML file and return.
 def wrapKeyword():

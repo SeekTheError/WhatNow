@@ -33,11 +33,13 @@ def analyzeAll():
   itterate over those, single threaded
   '''
   view=dblayer.view("article/notAnalized")
-  for u in view :
+  print len(view)
+  for u in view.view().rows :
     analyzeArticle.perform(u.id)
   
 
   
   
 if __name__ == '__main__':
+  print 'starting to analyze the articles'
   analyzeAll()

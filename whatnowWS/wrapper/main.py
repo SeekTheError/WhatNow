@@ -21,9 +21,11 @@ def perform():
         else:
             break
         #keyword, maxPage, past day
+        print "WRAPPING THE NY TIMES WHIT KEYWORD: "+keyword[0]
         wrapNYTimes(keyword[0])
+        print "WRAPPING THE WASHINGTON POST WHIT KEYWORD: "+keyword[0]
         wrapWPost(keyword[0])
-    maestro.analyzeAll()
+   
 
 if __name__ == '__main__':
     perform()

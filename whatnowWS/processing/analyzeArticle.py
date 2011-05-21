@@ -37,7 +37,7 @@ def perform(articleUrl) :
     print 'error occur during connect to url %s and read contents' % articleUrl
     return
   content=extractContent(rawContent,a.source)
-  a.content=content
+  a.content=content.decode('utf8', errors='replace')
   a.update()
   print a.content
   #tf/idf the results
