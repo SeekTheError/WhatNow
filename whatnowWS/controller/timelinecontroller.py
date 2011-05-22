@@ -4,8 +4,7 @@ from security.userauth import checkSession
 
 def view(request) :
   t = loader.get_template('timeline.html')
-  keyword = request.GET['key']
-  generateTimeline(keyword)
+  generateTimeline(request)
   context=RequestContext(request)
   context=checkSession(request,context)
   return HttpResponse(t.render(context))
@@ -14,12 +13,13 @@ def view(request) :
 import datetime
 import urllib2
 import json
-def generateTimeline(keyword):
+def generateTimeline(request):
+  keyword = request.GET['key']
   now=datetime.datetime.now()
   lastWeek=[]
   for i in range (6):
     lastWeek.append(now-datetime.timedelta(days=i));
-  baseUrl="http://localhost:5984/whatnowdb/_fti/_design/article/by_title?q="
+  baseUrl="http://localhost:5984/whatnowdb/_fti/_design/article/by_title?&q="
   results={}
   for day in lastWeek:
     if day.month<10:
@@ -28,20 +28,26 @@ def generateTimeline(keyword):
       month=str(day.month)
     date=str(day.year)+'-'+month+'-'+str(day.day)
     params=urllib2.quote(keyword)+urllib2.quote(" AND ")+"date:"+date;
-    print baseUrl+params
     f=urllib2.urlopen(baseUrl+params)
     results[date]=''
     for line in f.readlines():
-      results[date]+=line
-    
-    sortedTimeline={}  
-    for day in results.iterkeys():
-      articles=json.loads(results.get(day))
-      if articles.has_key('rows'):
-        fields=articles['rows']
-        for field in fields:
-          print 'score: '+str(field['score'])
-          print 'popularity: '+str(field ['fields']['popularity'])
+      results[date]+=line   
+  preJson={}  
+  for day in results.iterkeys():
+    articles=json.loads(results.get(day))
+    if articles.has_key('rows'):
+      fields=articles['rows']
+      temp=[]
+      for field in fields:
+        a={'title':field['fields']['title'],'popularity':field['fields']['popularity'],'url':field['id']}
+        temp.append(a)
+    preJson[day]=temp
+    print day
+    print preJson[day]
+  return HttpResponse(json.dumps(preJson))   
+
+          
+          
         
         
         

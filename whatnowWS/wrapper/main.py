@@ -36,4 +36,4 @@ def wrap():
     wrapWPost(keyword)
 
 if __name__ == '__main__':
-    wrap()
+    perform()
