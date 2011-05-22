@@ -55,7 +55,7 @@ function load_twit()
 		title: keyword,
 		subject: '',
 		width: 295,
-		height: 515,
+		height: 523,
 		theme: {
 		  shell: {
 		    background: '#1b4457',
