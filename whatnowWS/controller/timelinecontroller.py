@@ -21,18 +21,22 @@ def generateTimeline(request):
     lastWeek.append(now-datetime.timedelta(days=i));
   baseUrl="http://localhost:5984/whatnowdb/_fti/_design/article/by_title?&q="
   results={}
+  
+  preJson={}
+  preJson['days']=[]
   for day in lastWeek:
     if day.month<10:
       month='0'+str(day.month)
     else :
       month=str(day.month)
     date=str(day.year)+'-'+month+'-'+str(day.day)
+    preJson['days'].append(date)
     params=urllib2.quote(keyword)+urllib2.quote(" AND ")+"date:"+date;
     f=urllib2.urlopen(baseUrl+params)
     results[date]=''
     for line in f.readlines():
       results[date]+=line   
-  preJson={}  
+
   for day in results.iterkeys():
     articles=json.loads(results.get(day))
     if articles.has_key('rows'):
@@ -44,6 +48,8 @@ def generateTimeline(request):
     preJson[day]=temp
     print day
     print preJson[day]
+    
+    
   return HttpResponse(json.dumps(preJson))   
 
           

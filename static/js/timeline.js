@@ -96,13 +96,14 @@ function loadTimeline(key){
 }
 
 
-var timeline;
 function displayTimeline(timeline){
+console.log(timeline);
 timeline=timeline;
-//for (i=timeline
-
-
-
+days=timeline.days;
+for (i=0;i < days.length ;i++){
+console.log(timeline.days[i]);
+}
+return timeline;
 }
 
 
