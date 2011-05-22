@@ -9,11 +9,11 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			1002px;
+	width:			1102px;
 	height:			815px;
 	top:			15px;
 	left:			50%;
-	margin:			0 0 0 -500;
+	margin:			0 0 0 -550;
 	padding:		0 0 0 0;
 	background:		gray;
 }
@@ -23,7 +23,7 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			990px;
+	width:			1090px;
 	height:			70px;
 	margin:			5 5 5 5;
 	padding:		0 0 0 0;
@@ -35,7 +35,7 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			990px;
+	width:			1090px;
 	height:			686px;
 	margin:			0 5 5 5;
 	padding:		0 0 0 0;
@@ -48,7 +48,7 @@ body {
 	border-width:	1px;
 	position:		relative;
 /*	width:			96.8%;*/
-	width:			970px;
+	width:			1070px;
 	height:			26px;
 	margin:			0 5 0 5;
 	padding:		7 10 0 10;
@@ -68,61 +68,38 @@ body {
 }
 
 .msg {
-	margin:			4 0 4 0px;
+	margin:			8 5 6 0px;
 }
 
 .account {
 	border-style:	solid;
 	border-color:	orange;
-	border-width:	1px;
+	border-width:	0px;
 	position:		relative;
 	width:			260px;
 /*	height:			58px;*/
 	margin:			0 0 0 10;
-	padding:		5 0 0 0;
+	padding:		3 5 2 0;
 	float:			right;
-}
-
-.left_body {
-	border-style:	solid;
-	border-color:	red;
-	border-width:	1px;
-	position:		relative;
-	width:			730px;
-/*	height:			668px;*/
-	margin:			0 0 0 0;
-	padding:		0 0 0 0;
-	float:			left;
 }
 
 .top_body {
 	border-style:	solid;
-	border-color:	blue;
+	border-color:	red;
 	border-width:	0px;
 	position:		relative;
-	width:			990px;
+	width:			1090px;
 	margin:			0;
 	padding:		0;
 	float:			left;
 }
 
-.btm_body {
-	border-style:	solid;
-	border-color:	green;
-	border-width:	1px;
-	position:		relative;
-	width:			970px;
-	margin:			0;
-	padding:		0;
-	clear:			left;
-}
-
 .navi {
 	border-style:	solid;
-	border-color:	black;
+	border-color:	blue;
 	border-width:	0px;
 	position:		relative;
-	width:			715px;
+	width:			775px;
 /*	height:			50px;*/
 	margin:			10 0 10 10;
 /*	padding:		15 5 5 13;*/
@@ -132,15 +109,48 @@ body {
 
 .search {
 	border-style:	solid;
-	border-color:	black;
-	border-width:	1px;
+	border-color:	blue;
+	border-width:	0px;
 	position:		relative;
-	width:			240px;
-	height:			40px;
+	width:			280px;
+	height:			30px;
 	margin:			10 10 10 10;
-	padding:		0 0 0 0;
+	padding:		2 0 0 0;
 	float:			right;
-	text-align:		center;
+}
+
+.search-box {
+    background: url(../img/searchbar.png) no-repeat scroll left top transparent;
+    height: 30px;
+    margin-top: 0px;
+    overflow: hidden;
+    /*width: 288px;*/
+	width: 278px;
+	border: 0 none;
+}
+
+.search-field {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #666666;
+    float: left;
+	font-family:tahoma;
+    height: 31px;
+    line-height: 26px;
+    margin: 0;
+    padding: 1px 0 0 14px;
+    /*width: 232px;*/
+	width: 236px;
+}
+input.search-go {
+    background: url(../img/searchbar.png) no-repeat scroll right 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    width: 42px;
 }
 
 .content {
@@ -148,10 +158,10 @@ body {
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
-	width:			686px;
-	height:			583px;
+	width:			1048px;
+	height:			603px;
 	margin:			0 0 10 10;
-	padding:		15;
+	padding:		10;
 	clear:			both;
 	float:			left;
 /*	text-align:		center;*/
@@ -164,16 +174,38 @@ body {
 	position:		relative;
 	margin:			0;
 	padding:		0;
+	float:			left;
 }
 
-.category {
+#category {
 	border-style:	solid;
 	border-color:	black;
 	border-width:	1px;
 	position:		relative;
 	float:			right;
-	width:			240px;
-	height:			613px;
-	margin:			0 10 10 10;
+	width:			270px;
+	height:			590px;
+	margin:			0;
 	padding:		0;
+}
+
+#div_timeline {
+	border-style:	solid;
+	border-color:	black;
+	border-width:	1px;
+	width:			740px;
+	height:			480px;
+	position:		relative;
+	float:			left;
+}
+
+#div_google {
+	position:		relative;
+	padding:		10px;
+	float:			left;
+}
+
+#div_twitter {
+	position:		relative;
+	float:			right;
 }

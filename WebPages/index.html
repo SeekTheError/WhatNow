@@ -10,27 +10,6 @@
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/whatnow.js"></script>
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/account.js"></script>
-	<script type="text/javascript" src="{{ MEDIA_URL }}js/swfobject.js"></script>
-
-	<script type="text/javascript">
-	function load_flash(src, target, w, h) {  
-		var flashvars = {
-			cloud_data:"../cloud_data.xml",
-			tcolor:"0xFA9100",
-			tcolor2:"0xFF5900",
-			hicolor:"0xA63A00",
-			tspeed:"100",
-			fontFace:"Impact"
-		};
-		var params = {  
-			menu: "false",
-			quality : "best",
-			wmode : "opaque"  
-		};
-		var attributes = {};  
-		swfobject.embedSWF(src, target, w, h, "10", "expressInstall.swf", flashvars, params, attributes);
-	}
-	</script>
 
 	<title>[CS457] Web-base Software Development - WhatNOW</title>
 
@@ -41,7 +20,7 @@
 			<div class="logo" align="left">
 				WhatNOW?!
 			</div>
-			<div class="account" align="left">
+			<div class="account" align="right">
 			
 			{% if not sessionIsOpen%}
 			
@@ -52,7 +31,7 @@
 				<a href="#d_register" name="modal">
 					<input class="button black" type="button" value="Register" name="Register"/>
 				</a>
-				<div id="boxes">
+				<div id="boxes" align="left">
 					<!-- Start of Login Dialog -->  
 					<div id="d_login" class="window">
 						<form action="/security/signin/" method="POST">
@@ -73,34 +52,44 @@
 					<div id="d_register" class="window">
 						<form action="/register/" method="POST">
 						{% csrf_token %}
+							<fieldset>
+							<legend>Register form</legend>
 							<div>
 								<span class="label">User ID</span>
 								<input type="text" class="userid" name="registerLogin" />
-								<span class="error">Only numeral, character or _(underscore)</span>
+								<!-- <span class="error">Only numeral, character or _(underscore)</span> -->
 							</div>
 							<div>
 								<span class="label">Password</span>
 								<input type="password" class="password" name="registerPassword" />
-								<span class="error">Cannot be blank</span>
+								<!-- <span class="error">Cannot be blank</span> -->
 							</div>
 							<div>
 								<span class="label">Confirm Password</span>
 								<input type="password" class="confpass" name="confpass" />
-								<span class="error">It doesn't match</span>
+								<!-- <span class="error">It doesn't match</span> -->
 							</div>
 							<div>
 								<span class="label">E-mail</span>
 								<input type="text" class="email" name="registerEmail" />
-								<span class="error">Invaild E-mail Address</span>
+								<!-- <span class="error">Invaild E-mail Address</span> -->
 							</div>
-							<input class="submit" type="submit" value="Register" />
-							<a href="#"class="close"/><input type="button" name="Close" value="Close" /></a>
+							<br>
+							<div align="right">
+								<input id="submit" class="button black" type="submit" value="OK" />
+								<a href="#"class="close"/>
+									<input type="button" class="button black" name="Close" value="Close" />
+								</a>
+							</div>
+							</fieldset>
 						</form>
 					</div>
 					<!-- End of Register Dialog -->
-					<div class="msg">
+					<div class="msg" align="right">
 						{% if message %}
 						{{ message }}
+						{% else %}
+						Please login/register
 						{% endif %}	
 					</div>
 				</div>
@@ -112,10 +101,10 @@
 				Welcome <b>{{ user.login }}</b>!
 			</div>
 			<div align="right">
-			<form action="/security/signout/" method="POST">
-				{% csrf_token %}
-				<input type="submit" class="button black" value="Sign out"/>
-			</form>
+				<form action="/security/signout/" method="POST">
+					{% csrf_token %}
+					<input type="submit" class="button black" value="Sign out"/>
+				</form>
 			</div>
 			
 			{% endif %}
@@ -126,31 +115,26 @@
 			<div class="top_body">
 				<div class="navi">
 					<ul id="breadcrumb">
-						<li><a href="#" title="Home"><img src="{{ MEDIA_URL }}img/home.png" alt="Home" class="home" /></a></li>
-						<li><a href="#" title="Tag Cloud">Keyword</a></li>
+						<li><a href="" title="Home">
+							<img src="{{ MEDIA_URL }}img/home.png" alt="Home" class="home" />
+						</a></li>
+						<li><a href="" title="Tag Cloud">Keyword</a></li>
 						<li class="navi_rst">Timeline articles</li>
 					</ul>
 				</div>
 				<div class="search">
-					search
+					<div class="search-box">
+						<form method="get" action="">
+							<input size="15" class="search-field" name="s" id="s" value="Search.." onfocus="if(this.value == 'Search..') {this.value = ''; this.style.border='0px solid red';}" onblur="if (this.value == '') {this.value = 'Search..';this.style.border='0px solid red';}" type="text">
+							<input value="" class="search-go" type="submit"> 
+						</form>
+					</div>				
 				</div>
 			</div>
 				<div class="content">
-					contents: cloud & time-line results
-					<iframe src="/content/" name="content" frameborder=0 bordercolor=black width=675 height=575 marginheight=0 marginwidth=0>
+					<!-- contents: cloud & time-line results -->
+					<iframe src="/content/" name="content" frameborder=0 bordercolor=black width=1048 height=592 marginheight=0 marginwidth=0>
 					</iframe>
-				</div>
-				<div class="category">
-					category
-					<!--<div class="top_category">
-						My Topics
-					</div>
-					<div class="mid_category">
-						Popular Topics
-					</div>
-					</div class="btm_category">
-						All Topics
-					</div>-->
 				</div>
 		</div>
 		<div class="footer">

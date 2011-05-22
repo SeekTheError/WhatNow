@@ -7,110 +7,25 @@
 
 	<link rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" type="text/css" />
 
-<script src="http://www.google.com/jsapi?key=AIzaSyA5m1Nc8ws2BbmPRwKu5gFradvD_hgq6G0" type="text/javascript"></script>
-
-<script language="Javascript" type="text/javascript">
-  var obj = {
-  	init : function()
-  	{
-  		//obj.q = document.getElementById('q');
-  		//obj.b = document.getElementById('b');
-  	},
-  	// requesting function
-   	pingSearch : function()
-   	{
-  	   	var kw = getURLParam("key"); 
-  	    if (kw)
-  	    {
-  	      obj.s = document.createElement('script');
-  	      obj.s.type ='text/javascript';
-  	      obj.s.charset ='utf-8';
-  	      obj.s.src = 'http://search.twitter.com/search.json?output=json&callback=obj.pongSearch&q=' + encodeURI(kw);
-          document.getElementsByTagName('head')[0].appendChild(obj.s);
-  
-  	    }
-   	},
-   	// representing function
-  	pongSearch : function(z)
-  	{
-  	  obj.r.innerHTML = '';
-  		for (var i = 0; i < z.results.length; i++)
-  		{
-  			var li = document.createElement('li');
-  			var a = document.createElement('a');
-  			var p = document.createElement('p');
-        
-  			a.innerHTML = "author: "+z.results[i].from_user;
-  			p.innerHTML =  z.results[i].text;
-  			
-  			li.appendChild(a);
-  			li.appendChild(p);
-  			obj.r.appendChild(li);
-  		}
-  	}
-  	
-  };
-
-  google.load("elements", "1", {packages : ["newsshow"]});
-  
-  function onLoad() {
-    // Set the queries to USC Football and NHL
-    var options = {
-      "queryList" : [
-        {
-          "title" : "Great Football",
-          "q" : "USC Football"
-        }
-      ]
-    }
-
-    text_ = getURLParam("key")
-    
-    options.queryList[0].title = text_;
-    options.queryList[0].q = text_;
-    
-    var content = document.getElementById('content');
-    var newsShow = new google.elements.NewsShow(content, options);
-
-	obj.r = document.getElementById('r');
-	
-    obj.pingSearch();    
-  }
-  
-  <!--google.setOnLoadCallback(onLoad);-->
-
-</script>
-
-<script type="text/javascript">
-	function getURLParam(strParamName){
-  		var strReturn = "";
-  		var strHref = window.location.href;
-	  	if ( strHref.indexOf("?") > -1 ){
-	    	var strQueryString = strHref.substr(strHref.indexOf("?")).toLowerCase();
-	    	var aQueryString = strQueryString.split("&");
-		    for ( var iParam = 0; iParam < aQueryString.length; iParam++ ){
-		    	if (aQueryString[iParam].indexOf(strParamName.toLowerCase() + "=") > -1 ){
-		        	var aParam = aQueryString[iParam].split("=");
-		        	strReturn = aParam[1];
-		        	break;
-		    	}
-	    	}
-  		}
-  		//alert(strReturn)
-  		return unescape(strReturn);
-	}
-</script>
- 
+	<script src="http://www.google.com/jsapi?key=AIzaSyA5m1Nc8ws2BbmPRwKu5gFradvD_hgq6G0" type="text/javascript"></script>
+	<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+ 	<script type="text/javascript" src="{{ MEDIA_URL }}js/timeline.js"></script>
+		
 	<title>[CS457] Web-base Software Development - WhatNOW</title>
 
 </head>
 
 <body onload="onLoad();">
-	Google
-    <div id="content"></div>
-    
-	Twitter
-	<div id="r"></div>
 
+	<div id="div_timeline">
+		timeline
+	</div>
+	
+	<div id="div_twitter">
+		<script>load_twit();</script>		
+	</div>
+	
+    <div id="div_google"></div>
+	
 </body>
 </html>
