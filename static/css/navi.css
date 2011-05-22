@@ -1,12 +1,12 @@
 
 #breadcrumb {
 /*	font: 16px Arial, Helvetica, sans-serif;*/
-	font-size: 15px;
+	font-size: 14px;
 	font-family: verdana bold;
 	background-image:url('../img/bc_bg.png'); 
 	background-repeat:repeat-x;
-	height:40px;
-	line-height:40px;
+	height:30px;
+	line-height:30px;
 	color:#9b9b9b;
 	border:solid 1px #cacaca;
 	width:100%;
@@ -22,7 +22,7 @@
 }
 
 #breadcrumb a {
-	height:40px;
+	height:30px;
 	display:block;
 	background-image:url('../img/bc_separator.png'); 
 	background-repeat:no-repeat; 
@@ -38,7 +38,7 @@
 
 .home {
 	border:none;
-	margin: 10 0 0 0;
+	margin: 5 0 0 0;
 }
 
 .navi_rst {

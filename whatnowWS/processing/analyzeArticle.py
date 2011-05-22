@@ -127,3 +127,15 @@ def yahooResultNum(articleUrl):
     return int(num)
 
 
+def googleResultNum(articleUrl):
+    url = 'http://www.google.com/#sclient=psy&q=%s' % '"'+articleUrl+'"'
+    try:
+        text = urlopen(url).read()
+    except:
+        print 'error occur during connect to url %s and read contents' % url
+        return 0
+    print text
+    soup = BeautifulSoup(text.decode('utf8', errors='replace'))
+    list = soup('div', {'id':'resultStats'})
+    print list
+

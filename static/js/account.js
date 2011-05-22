@@ -91,7 +91,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.submit').click(function(event) {
+	$('#submit').click(function(event) {
 		var uid = $('.userid').val();
 		if (validate_userid(uid)) {
 			$('.error').hide();
@@ -101,7 +101,8 @@ $(document).ready(function() {
 			$('.error').hide();
 		}
 		else {
-			$('.error').show();
+			//$('.error').show();
+			alert('invalid input!')
 			event.preventDefault();
 		}
 	});
