@@ -6,19 +6,21 @@ function onLoad()
 	var options = {
 		"queryList" : [
 		{
-	  		"title" : "Great Football",
-	  		"q" : "USC Football"
+	  		"title" : "",
+	  		"q" : ""
 		}]
 	}
 	
 	// get the keyword from parameter
 	text_ = getURLParam("key")
 	
+	
 	options.queryList[0].title = text_;
 	options.queryList[0].q = text_;
 	
 	var content = document.getElementById('div_google');
 	var newsShow = new google.elements.NewsShow(content, options);
+	loadTimeline(text_);
 }
   
 <!--google.setOnLoadCallback(onLoad);-->
@@ -79,3 +81,40 @@ function load_twit()
 		}
 	}).render().start();	
 }
+
+
+function loadTimeline(key){
+			url = '/getTimeline?key="' + key + '"';
+			$.ajax({
+				type : "GET",
+				dataType : "json",
+				url : url,
+				success : function(data) {
+					displayTimeline(eval(data));
+				}
+			});
+}
+
+
+var timeline;
+function displayTimeline(timeline){
+timeline=timeline;
+//for (i=timeline
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

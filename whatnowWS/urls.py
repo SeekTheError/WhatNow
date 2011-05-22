@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     
     (r'^content/$', 'controller.contentcontroller.view'),  
     (r'^timeline/$', 'controller.timelinecontroller.view'),
-    (r'^gettimeline/$', 'controller.timelinecontroller.generateTimeline'),
+    (r'^getTimeline/$', 'controller.timelinecontroller.generateTimeline'),
      
     
     #For static media files
