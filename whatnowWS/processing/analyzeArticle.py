@@ -37,7 +37,7 @@ def perform(articleUrl) :
     print 'error occur during connect to url %s and read contents' % articleUrl
     return
   content=extractContent(rawContent,a.source)
-  a.content=content.decode('utf8', errors='replace')
+  a.content=content.decode('utf8', 'replace')
   a.update()
   print a.content
   #tf/idf the results
@@ -46,7 +46,7 @@ def perform(articleUrl) :
   a.tags=[]
   #keep only the 10 first tags
   while (i < 10 and i < len(words)) :
-    a.tags.append(words[i].decode('utf8', errors='replace'))
+    a.tags.append(words[i].decode('utf8', 'replace'))
     i+=1
   print a.tags
   #measure popularity

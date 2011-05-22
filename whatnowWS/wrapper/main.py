@@ -27,5 +27,13 @@ def perform():
         wrapWPost(keyword[0])
    
 
+def wrap():
+  f=open('keywords.txt','r')
+  for keyword in f.readlines():
+    print "WRAPPING THE NY TIMES WHIT KEYWORD: "+keyword
+    wrapNYTimes(keyword)
+    print "WRAPPING THE WASHINGTON POST WHIT KEYWORD: "+keyword
+    wrapWPost(keyword)
+
 if __name__ == '__main__':
-    perform()
+    wrap()
