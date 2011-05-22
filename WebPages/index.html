@@ -124,8 +124,9 @@
 				</div>
 				<div class="search">
 					<div class="search-box">
-						<form method="get" action="">
-							<input size="15" class="search-field" name="s" id="s" value="Search.." onfocus="if(this.value == 'Search..') {this.value = ''; this.style.border='0px solid red';}" onblur="if (this.value == '') {this.value = 'Search..';this.style.border='0px solid red';}" type="text">
+						<form method="get" action="/timeline/" target="content">
+							{% csrf_token %}
+							<input size="15" class="search-field" name="key" id="key" value="Search.." onfocus="if(this.value == 'Search..') {this.value = ''; this.style.border='0px solid red';}" onblur="if (this.value == '') {this.value = 'Search..';this.style.border='0px solid red';}" type="text">
 							<input value="" class="search-go" type="submit"> 
 						</form>
 					</div>				
