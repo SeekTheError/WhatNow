@@ -2,6 +2,7 @@ from urllib import urlopen
 from xml.dom.minidom import *
 from HTMLParser import HTMLParser
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
+import json
 
 import sys
 sys.path.insert(0, '..')
@@ -10,6 +11,18 @@ from couchdbinterface.entities import Keyword
 #Sotre keywords = (keyword, popularity)
 keywordList = []
 maxKeywordNum = 20
+SEARCH_BASE ="http://api.twitter.com/1/trends/weekly.json"
+
+def twitterSearch():
+    url = SEARCH_BASE + '?' + 'output=json&exclude=hashtags'
+    result = json.load(urlopen(url))
+    return result['trends']
+
+def search():
+  global keywordList
+  info = twitterSearch()
+  for item in info['2011-05-16']:
+      keywordList.append([item['query'],0])
 
 #Gather top 50 most searched keyword from nytimes.
 #It may be best choice.
@@ -141,7 +154,7 @@ def toXML():
         node.appendChild(keyword)
         root.appendChild(node)
     print doc.toprettyxml()
-    doc.writexml(file('../static/cloud_data.xml', 'w'))
+    doc.writexml(file('../../static/cloud_data.xml', 'w'))
 
 #Cmp function to sorting keywrodList by popularity
 def cmp(e1, e2):
@@ -166,6 +179,7 @@ def storeKeyword():
 def wrapKeyword():
     global keywordList
     NYTMostSearched()
+    search()
     #NYTMostPopular()    not good
     #WPTopics()    not good
     #measurePop()    not good, number of article does not mean popularity of keyword
