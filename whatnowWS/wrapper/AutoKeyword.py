@@ -21,7 +21,16 @@ def twitterSearch():
 def search():
   global keywordList
   info = twitterSearch()
-  for item in info['2011-05-16']:
+  url = 'http://api.twitter.com/1/trends/weekly.json?output=json&exclude=hashtags'
+  try:
+      text = urlopen(url).read()
+  except:
+      print 'error occur during connect to url %s' % url
+      return
+  index1 = text.find('"trends":{"')+11
+  index2 = text.find('":[{"',index1)
+  text = text[index1:index2]
+  for item in info[text]:
       keywordList.append([item['query'],0])
 
 #Gather top 50 most searched keyword from nytimes.
