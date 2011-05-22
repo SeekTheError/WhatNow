@@ -154,7 +154,9 @@ def cmp(e1, e2):
 
 #store keywords in db
 def storeKeyword():
+    f = file('../keyword.txt', 'w')
     for u in keywordList:
+        f.write(u[0]+'\n')
         keyword = Keyword()
         keyword._id=u[0]
         keyword.popularity=u[1]

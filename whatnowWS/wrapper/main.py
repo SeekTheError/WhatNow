@@ -4,6 +4,7 @@ from NYTimes import wrapNYTimes
 from WashingtonPost import wrapWPost
 from AutoKeyword import wrapKeyword
 from processing import maestro
+from processing import analyzeArticle
 from couchdbinterface import dblayer
 from couchdbinterface.entities import *
 
