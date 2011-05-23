@@ -11,7 +11,16 @@
 	<script src="http://widgets.twimg.com/j/2/widget.js"></script>
  	<script type="text/javascript" src="{{ MEDIA_URL }}js/timeline.js"></script>
  	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.js"></script>
-		
+ 	
+ 		<script type="text/javascript" >
+ 	function cloudCallback(keyword){
+val=$("#key").val();
+console.log(val);
+$("#navigation").removeClass('hidden');
+$("#navigation").html("Viewing Topic: <b>"+keyword+"</b>");
+$("#navigation").attr("topic",keyword);
+}
+		</script>
 	<title>[CS457] Web-base Software Development - WhatNOW</title>
 
 </head>

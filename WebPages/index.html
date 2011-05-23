@@ -118,13 +118,12 @@
 						<li><a href="" title="Home">
 							<img src="{{ MEDIA_URL }}img/home.png" alt="Home" class="home" />
 						</a></li>
-						<li><a href="" title="Tag Cloud">Keyword</a></li>
-						<li class="navi_rst">Timeline articles</li>
+						<li class="navi_rst hidden" id="navigation">Timeline articles</li>
 					</ul>
 				</div>
 				<div class="search">
 					<div class="search-box">
-						<form method="get" action="/timeline/" target="content">
+						<form method="get" action="/timeline/" target="content" onsubmit="submitCallback();">
 							{% csrf_token %}
 							<input size="15" class="search-field" name="key" id="key" value="Search.." onfocus="if(this.value == 'Search..') {this.value = ''; this.style.border='0px solid red';}" onblur="if (this.value == '') {this.value = 'Search..';this.style.border='0px solid red';}" type="text">
 							<input value="" class="search-go" type="submit"> 
@@ -133,6 +132,7 @@
 				</div>
 			</div>
 				<div class="content">
+				
 					<!-- contents: cloud & time-line results -->
 					<iframe src="/content/" name="content" frameborder=0 bordercolor=black width=1048 height=592 marginheight=0 marginwidth=0>
 					</iframe>

@@ -193,10 +193,13 @@ input.search-go {
 	border-style:	solid;
 	border-color:	black;
 	border-width:	1px;
-	width:			740px;
+	width:			730px;
 	height:			480px;
 	position:		relative;
 	float:			left;
+	max-height : 480px;
+	overflow: auto;
+	font-size : 15pt;
 }
 
 #div_google {
@@ -206,6 +209,53 @@ input.search-go {
 }
 
 #div_twitter {
-	position:		relative;
+	position:		absolute;
+	top: 0px;
+	right:0px;
 	float:			right;
 }
+
+#div_timeline ul {
+list-style-type: none;
+-webkit-padding-start: 0px;
+}
+
+#div_timeline li {
+margin-top:4px;
+margin-bottom :4px;
+
+
+}
+
+.timeline_day{
+padding-top : 5px;
+padding-bottom: 5px;
+
+}
+.timeline_day:hover{
+background-color: #AADBFF;
+
+
+}
+
+.timeline_day a:hover {
+color: black;
+
+}
+
+
+
+.hidden {
+ display: none;
+}
+.item{ background-color: #C0C0C0;
+}
+.item{ color: blue;
+
+}
+.popularity{ 
+color:red;
+padding:3px;
+}
+
+

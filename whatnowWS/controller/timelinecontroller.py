@@ -36,23 +36,22 @@ def generateTimeline(request):
     results[date]=''
     for line in f.readlines():
       results[date]+=line   
-
+  preJson['articles']=[]
   for day in results.iterkeys():
     articles=json.loads(results.get(day))
     if articles.has_key('rows'):
       fields=articles['rows']
       temp=[]
       for field in fields:
-        a={'title':field['fields']['title'],'popularity':field['fields']['popularity'],'url':field['id']}
-        temp.append(a)
-    preJson[day]=temp
-    print day
-    print preJson[day]
-    
-    
-  return HttpResponse(json.dumps(preJson))   
+        a={'date':day,'title':field['fields']['title'],'popularity':field['fields']['popularity'],'url':field['id']}
+        preJson['articles'].append(a)
 
-          
+    
+    
+  return HttpResponse(json.dumps(preJson))
+
+  
+         
           
         
         

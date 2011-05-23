@@ -7,6 +7,7 @@
 
 	<link rel="stylesheet" href="{{ MEDIA_URL }}css/main.css" type="text/css" />
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/swfobject.js"></script>
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.min.js"></script>
 
 	<script type="text/javascript">
 	function load_flash(src, target, w, h) {  
@@ -26,6 +27,16 @@
 		var attributes = {};  
 		swfobject.embedSWF(src, target, w, h, "10", "expressInstall.swf", flashvars, params, attributes);
 	}
+ 	function cloudCallback(keyword){
+    console.log(keyword);
+    $("#navigation",window.parent.document).removeClass('hidden');
+    $("#navigation",window.parent.document).html("Viewing Topic: <b>"+keyword+"</b>");
+    $("#navigation",window.parent.document).attr("topic",keyword);
+    window.location="/timeline/?key="+keyword;
+}
+	
+	
+	
 	</script>
 
 	<title>[CS457] Web-base Software Development - WhatNOW</title>

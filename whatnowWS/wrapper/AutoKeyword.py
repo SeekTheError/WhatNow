@@ -145,7 +145,8 @@ def toXML():
         else:
             break
         node = doc.createElement('a')
-        node.setAttributeNS(None, 'href', '/timeline/?key='+keyword[0])
+        #node.setAttributeNS(None, 'href', '/timeline/?key='+keyword[0])
+        node.setAttributeNS(None, 'href', 'javascript:cloudCallback("'+keyword[0]+'");');#'cloudCallback('+keyword[0]+');')
         #node.setAttributeNS(None, 'target', 'content')
         if (i <= 5):
             node.setAttributeNS(None, 'style', 'font-size: 15pt;')
@@ -163,7 +164,7 @@ def toXML():
         node.appendChild(keyword)
         root.appendChild(node)
     print doc.toprettyxml()
-    doc.writexml(file('../../static/cloud_data.xml', 'w'))
+    doc.writexml(file('../static/cloud_data.xml', 'w'))
 
 #Cmp function to sorting keywrodList by popularity
 def cmp(e1, e2):
