@@ -31,10 +31,10 @@ def perform():
 def wrap():
   f=open('keywords.txt','r')
   for keyword in f.readlines():
-    print "WRAPPING THE NY TIMES WHIT KEYWORD: "+keyword
+    print "WRAPPING THE NY TIMES WHIT KEYWORD: "+keyword.replace('\n','')
     wrapNYTimes(keyword)
-    print "WRAPPING THE WASHINGTON POST WHIT KEYWORD: "+keyword
+    print "WRAPPING THE WASHINGTON POST WHIT KEYWORD: "+keyword.replace('\n','')
     wrapWPost(keyword)
 
 if __name__ == '__main__':
-    perform()
+    wrap();

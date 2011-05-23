@@ -17,7 +17,7 @@ def generateTimeline(request):
   keyword = request.GET['key']
   now=datetime.datetime.now()
   lastWeek=[]
-  for i in range (6):
+  for i in range (8):
     lastWeek.append(now-datetime.timedelta(days=i));
   baseUrl="http://localhost:5984/whatnowdb/_fti/_design/article/by_title?&q="
   results={}
