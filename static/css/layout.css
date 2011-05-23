@@ -4,6 +4,14 @@ body {
 	padding:		0px;
 }
 
+#add_fav {
+
+position: absolute;
+float: right;
+right: -350px;
+
+}
+
 .bg {
 	border-style:	solid;
 	border-color:	black;
@@ -244,6 +252,13 @@ color: black;
 
 }
 
+#add_fav{
+position: absolute;
+float: right;
+right: 315px;
+margin: 10 0 0 0px;
+
+}
 
 
 .hidden {
